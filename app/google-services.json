@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "544124063527",
+    "firebase_url": "https://penquiz-3d349.firebaseio.com",
+    "project_id": "penquiz-3d349",
+    "storage_bucket": "penquiz-3d349.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544124063527:android:561c28f3ca307416f82302",
+        "android_client_info": {
+          "package_name": "com.example.penquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "544124063527-9f6ucuba1lnje3p2l5g9mvrrstc30g0c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.penquiz",
+            "certificate_hash": "7c7a8a3a3644dcc4c914a8bcfe3d16713eb8f517"
+          }
+        },
+        {
+          "client_id": "544124063527-09lj6cimlc03pntbuvsvf8dlcig1thdn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7ffCm8pwRXZaHEILUSxhv3yVI4ttbxQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "544124063527-09lj6cimlc03pntbuvsvf8dlcig1thdn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
