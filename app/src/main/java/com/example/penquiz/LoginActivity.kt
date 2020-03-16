@@ -1,5 +1,6 @@
 package com.example.penquiz
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -21,8 +22,8 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
         // Buttons
         emailSignInButton.setOnClickListener(this)
         emailCreateAccountButton.setOnClickListener(this)
-        signOutButton.setOnClickListener(this)
-        verifyEmailButton.setOnClickListener(this)
+//        signOutButton.setOnClickListener(this)
+//        verifyEmailButton.setOnClickListener(this)
 
         // [START initialize_auth]
         // Initialize Firebase Auth
@@ -38,52 +39,30 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             status.text = getString(R.string.emailpassword_status_fmt, user.email, user.isEmailVerified)
-            detail.text = getString(R.string.firebase_status_fmt, user.uid)
+//            detail.text = getString(R.string.firebase_status_fmt, user.uid)
 
-            emailPasswordButtons.visibility = View.GONE
-            emailPasswordFields.visibility = View.GONE
-            signedInButtons.visibility = View.VISIBLE
-            verifyEmailButton.isEnabled = !user.isEmailVerified
+//            emailPasswordButtons.visibility = View.GONE
+//            emailPasswordFields.visibility = View.GONE
+//            verifyEmailButton.isEnabled = !user.isEmailVerified
         } else {
-            status.setText(R.string.signed_out)
-            detail.text = null
+            status.text = "Enter email and password to login"
+//            emailPasswordButtons.visibility = View.VISIBLE
+//            emailPasswordFields.visibility = View.VISIBLE
 
-            emailPasswordButtons.visibility = View.VISIBLE
-            emailPasswordFields.visibility = View.VISIBLE
-            signedInButtons.visibility = View.GONE
         }
     }
 
-    private fun createAccount(email: String, password: String) {
-        Log.d(TAG, "createAccount:$email")
-        if (!validateForm()) {
-            return
-        }
-
-        // showProgressBar()
-
-        // [START create_user_with_email]
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                }
-
-                // [START_EXCLUDE]
-                // [END_EXCLUDE]
-            }
-        // [END create_user_with_email]
+    /*
+    If users want to create the account, it will direct to another
+     */
+    private fun createAccount(view: View) {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 
+    /*
+    If users want to sign in immediately
+     */
     private fun signIn(email: String, password: String) {
         Log.d(TAG, "signIn:$email")
         if (!validateForm()) {
@@ -98,6 +77,8 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
                     updateUI(user)
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -122,7 +103,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
 
     private fun sendEmailVerification() {
         // Disable button
-        verifyEmailButton.isEnabled = false
+        //verifyEmailButton.isEnabled = false
 
         // Send verification email
         // [START send_email_verification]
@@ -131,7 +112,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
             ?.addOnCompleteListener(this) { task ->
                 // [START_EXCLUDE]
                 // Re-enable button
-                verifyEmailButton.isEnabled = true
+                //verifyEmailButton.isEnabled = true
 
                 if (task.isSuccessful) {
                     Toast.makeText(baseContext,
@@ -166,20 +147,21 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
         } else {
             fieldPassword.error = null
         }
-
         return valid
     }
+
     override fun onClick(v: View) {
         val i = v.id
         when (i) {
-            R.id.emailCreateAccountButton -> createAccount(fieldEmail.text.toString(), fieldPassword.text.toString())
+            // R.id.emailCreateAccountButton -> createAccount(fieldEmail.text.toString(), fieldPassword.text.toString())
             R.id.emailSignInButton -> signIn(fieldEmail.text.toString(), fieldPassword.text.toString())
-            R.id.signOutButton -> signOut()
-            R.id.verifyEmailButton -> sendEmailVerification()
+            R.id.emailCreateAccountButton -> createAccount(emailCreateAccountButton)
+            //R.id.signOutButton -> signOut()
+            //R.id.verifyEmailButton -> sendEmailVerification()
         }
     }
 
     companion object {
-        private const val TAG = "EmailPassword"
+        private const val TAG = "LoginActivity"
     }
 }
