@@ -40,4 +40,10 @@
         android:name="com.example.penquiz.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+
+    <fragment
+        android:id="@+id/nav_contact"
+        android:name="com.example.penquiz.ui.contactus.ContactFragment"
+        android:label="Contact us"
+        tools:layout="@layout/fragment_contactus" />
 </navigation>
