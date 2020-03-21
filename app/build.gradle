@@ -36,8 +36,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
-    implementation 'com.google.firebase:firebase-auth:16.0.5'
+    implementation 'com.google.firebase:firebase-auth:19.3.0'//update version on 22 March 62 because when I run along with push data to firebase, it crash
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
+    //add for databasereference
+    implementation 'com.google.firebase:firebase-database:19.2.1'
 
     // add the Firebase SDK for Google Analytics
     // implementation 'com.google.firebase:firebase-analytics:17.2.2'
