@@ -89,5 +89,7 @@
 
     <string name="error_sign_in_failed">Sign in failed, see logs for details.</string>
     <string name="logo">logo</string>
-    <string name="textfeedback">send us feedbacl</string>
+    <string name="sendfeedback">SEND</string>
+    <string name="textfeedback">write feedback</string>
+
 </resources>
