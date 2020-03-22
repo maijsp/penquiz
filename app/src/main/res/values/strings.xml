@@ -91,5 +91,6 @@
     <string name="logo">logo</string>
     <string name="sendfeedback">SEND</string>
     <string name="textfeedback">write feedback</string>
+    <string name="contact_us">Contact us</string>
 
 </resources>
