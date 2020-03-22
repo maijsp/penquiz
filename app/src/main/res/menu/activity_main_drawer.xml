@@ -23,10 +23,10 @@
         <item
             android:id="@+id/nav_contact"
             android:icon="@drawable/ic_menu_contact_foreground"
-            android:title="Contact us" />
+            android:title="@string/contact_us" />
     </group>
 
-    <item android:title="Communicat e">
+    <item android:title="Communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
