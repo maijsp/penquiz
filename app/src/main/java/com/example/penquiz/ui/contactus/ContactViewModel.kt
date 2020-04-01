@@ -14,8 +14,5 @@ class ContactViewModel : ViewModel() {
         value = "Contact us"
     }
     val text: LiveData<String> = _text
-
     private val mapFragment = SupportMapFragment()
-
-
 }

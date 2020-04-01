@@ -18,7 +18,6 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
         // Buttons
         emailSignInButton.setOnClickListener(this)
         emailCreateAccountButton.setOnClickListener(this)
@@ -30,12 +29,14 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
         auth = FirebaseAuth.getInstance()
         // [END initialize_auth]
     }
+
     override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         updateUI(currentUser)
     }
+
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             status.text = getString(R.string.emailpassword_status_fmt, user.email, user.isEmailVerified)
@@ -48,7 +49,6 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
             status.text = "Enter email and password to login"
 //            emailPasswordButtons.visibility = View.VISIBLE
 //            emailPasswordFields.visibility = View.VISIBLE
-
         }
     }
 

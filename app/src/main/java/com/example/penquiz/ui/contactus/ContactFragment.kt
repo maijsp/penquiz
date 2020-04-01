@@ -43,10 +43,8 @@ class ContactFragment  : Fragment(), OnMapReadyCallback,View.OnClickListener {
             android.R.string.yes, Toast.LENGTH_SHORT).show()
     }
 
-
-
-    var data_base = FirebaseDatabase.getInstance()
-    var myRef: DatabaseReference = data_base.getReference()  //point to the root named "penquiz3d349"
+//    var database = FirebaseDatabase.getInstance()
+//    var myRef: DatabaseReference = database.getReference()  //point to the root named "penquiz3d349"
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -86,17 +84,12 @@ class ContactFragment  : Fragment(), OnMapReadyCallback,View.OnClickListener {
 //
 //            }
 //        })
-
-
-
         return root
 //// Inflate the layout for this fragment
 ////return inflater.inflate(R.layout.fragment_contactus, container, false)
     }
 
-
     override fun onMapReady(googleMap: GoogleMap) {
-
         googleMap.addMarker(MarkerOptions().position(LatLng(13.793128, 100.323322)).title("Mahidol University"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(13.793128, 100.323322),15.0f))
 
@@ -144,8 +137,7 @@ class ContactFragment  : Fragment(), OnMapReadyCallback,View.OnClickListener {
         }
 
         //database.child("Messages").child("senderID").child(senderID.toString()).child(message).push()
-        myRef.child("Messages").child("sender ID").child(senderID.toString()).push().setValue(message)
-
+//        myRef.child("Messages").child("sender ID").child(senderID.toString()).push().setValue(message)
 
         var builder = AlertDialog.Builder(this.context)
         // Set the alert dialog title
@@ -183,6 +175,5 @@ class ContactFragment  : Fragment(), OnMapReadyCallback,View.OnClickListener {
 
 
 }
-
 
 

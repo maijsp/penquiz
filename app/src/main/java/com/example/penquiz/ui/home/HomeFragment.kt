@@ -32,9 +32,7 @@ class HomeFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         // create the object quiz view inside the root view - recycleView_main
-
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
         mRecyclerView = rootView.findViewById(R.id.recycleView_main)
 
@@ -43,21 +41,15 @@ class HomeFragment : Fragment() {
 
         quizesRef = FirebaseDatabase.getInstance().getReference().child("Quizes")
         println(quizesRef)
-
-
-        val options: FirebaseRecyclerOptions<Quizes> = FirebaseRecyclerOptions.Builder<Quizes>()
-            .setQuery(quizesRef, Quizes::class.java)
-            .build()
+        val options: FirebaseRecyclerOptions<Quizes> = FirebaseRecyclerOptions.Builder<Quizes>().setQuery(quizesRef, Quizes::class.java).build()
 
         val firebaseRecyclerAdapter = object : FirebaseRecyclerAdapter<Quizes, CustomViewHolder>(options) {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
                 val itemview = LayoutInflater.from(parent.context).inflate(R.layout.quizes_row, parent, false)
                 return CustomViewHolder(itemview)
             }
-
             override fun onBindViewHolder(holder: CustomViewHolder, position: Int, quiz: Quizes) {
                 val refid = getRef(position).key.toString()
-
                 quizesRef.child(refid).addValueEventListener(object: ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
                         Log.e(TAG, "Fail to load database")
@@ -70,20 +62,12 @@ class HomeFragment : Fragment() {
                 })
             }
         }
-
         // set layout
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
         // set adapter
         mRecyclerView.adapter = firebaseRecyclerAdapter
         firebaseRecyclerAdapter.startListening()
         return rootView
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        if (view != null) {
-            val parentViewGroup = view!!.parent as ViewGroup
-            parentViewGroup?.removeAllViews()
-        }
     }
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var quizename: TextView = itemView!!.findViewById<TextView>(R.id.quiz_name)
