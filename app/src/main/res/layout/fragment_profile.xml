@@ -16,6 +16,7 @@
             <!-- android:scaleType="fitCenter, centerInside" : to make the image the same size as the button
             android:adjustViewBounds="true" if your image has unequal height/width.
             app:srcCompat="@drawable/logo"
+            success
             -->
 
             <ImageButton
