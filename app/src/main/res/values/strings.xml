@@ -14,7 +14,7 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
-<!--    My String   -->
+    <!--    My String   -->
     <!-- LoginActivity -->
     <string name="emailpassword_title_text">Log in</string>
     <!-- RegisterActivity -->
@@ -23,7 +23,7 @@
     <string name="hint_conf_password">Re-enter password</string>
     <string name="cancel">CANCEL</string>
     <string name="confirm_register">Confirm</string>
-<!--    -->
+    <!--    -->
     <string name="hint_user_id">User ID</string>
     <string name="get_custom_token">Get Token</string>
     <string name="sign_in">Sign In</string>
@@ -90,5 +90,14 @@
     <string name="sendfeedback">SEND</string>
     <string name="textfeedback">write feedback</string>
     <string name="contact_us">Contact us</string>
+    <string name="title_activity_quiz">QuizActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 </resources>

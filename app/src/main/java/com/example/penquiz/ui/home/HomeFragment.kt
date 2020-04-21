@@ -1,11 +1,13 @@
 package com.example.penquiz.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,7 +44,7 @@ class HomeFragment : Fragment() {
         quizesRef = FirebaseDatabase.getInstance().getReference().child("Quizes")
         println(quizesRef)
         val options: FirebaseRecyclerOptions<Quizes> = FirebaseRecyclerOptions.Builder<Quizes>().setQuery(quizesRef, Quizes::class.java).build()
-
+        var onItemClick: ((Quizes) -> Unit)? = null
         val firebaseRecyclerAdapter = object : FirebaseRecyclerAdapter<Quizes, CustomViewHolder>(options) {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
                 val itemview = LayoutInflater.from(parent.context).inflate(R.layout.quizes_row, parent, false)
@@ -52,9 +54,11 @@ class HomeFragment : Fragment() {
                 val refid = getRef(position).key.toString()
                 quizesRef.child(refid).addValueEventListener(object: ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
+                        // if can not load database
                         Log.e(TAG, "Fail to load database")
                     }
                     override fun onDataChange(p0: DataSnapshot) {
+                        // if data in database is changed
                         holder.quizename.setText(quiz.title)
                         holder.quiznum.setText(quiz.getNumQuestion())
                         println("$quiz_name and $quiz_detail")
@@ -69,8 +73,16 @@ class HomeFragment : Fragment() {
         firebaseRecyclerAdapter.startListening()
         return rootView
     }
-    class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        var quizename: TextView = itemView!!.findViewById<TextView>(R.id.quiz_name)
-        var quiznum: TextView = itemView!!.findViewById(R.id.quiz_detail)
-    }
+     inner class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+         var quizename: TextView = itemView!!.findViewById<TextView>(R.id.quiz_name)
+         var quiznum: TextView = itemView!!.findViewById(R.id.quiz_detail)
+         init {
+             itemView.setOnClickListener{
+                 Toast.makeText(context, "This is Toast example.+ ${quizename.text}", Toast.LENGTH_LONG).show();
+                 var intent = Intent(itemView.context, QuizActivity::class.java)
+                 itemView.context.startActivity(intent)
+                 intent.putExtra("Username","John Doe")
+             }
+         }
+     }
 }
