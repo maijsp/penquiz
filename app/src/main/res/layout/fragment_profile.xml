@@ -27,8 +27,8 @@
                 android:layout_marginTop="30dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/roundcorner"
-                android:clickable="true"
-                android:scaleType="centerInside"
+                android:onClick="addOperation"
+                android:scaleType="centerCrop"
                 android:src="@drawable/ic_setting_camera"
                 tools:ignore="VectorDrawableCompat" />
 
