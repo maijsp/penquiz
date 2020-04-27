@@ -99,6 +99,11 @@ class QuizActivity : AppCompatActivity() {
         textQuesTitle.text = "Question ${(total+2)}"
         if (total > countQuestion) {
             // go to results activity
+            val intent = Intent(this, ResultActivity::class.java).apply {
+                putExtra("result", total);
+            }
+            startActivity(intent)
+
         } else {
             total++;
             // go to next question
@@ -112,11 +117,13 @@ class QuizActivity : AppCompatActivity() {
 
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     var questions: Questions? = dataSnapshot.getValue<Questions>()
+
+                    // Assign value to the questions
                     testQuesDesc.text = questions!!.questionText
-                    button1.text = questions.option_A
-                    button2.text = questions.option_B
-                    button3.text = questions.option_C
-                    button4.text = questions.option_D
+                    button1.text = questions.option_A  // Option A
+                    button2.text = questions.option_B  // Option B
+                    button3.text = questions.option_C  // Option C
+                    button4.text = questions.option_D  // Option D
                     // Log.i("ques", questions!!.answer)
 
                     // When user click choice 1
@@ -130,12 +137,11 @@ class QuizActivity : AppCompatActivity() {
                                     @SuppressLint("ResourceAsColor")
                                     override fun run() {
                                         Log.i("Check", "Correct answer")
-
                                         // update the score
                                         score++;
                                         // change button to default for  new  question
-                                        button1.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-
+                                        // button1.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
+                                        button1.setBackgroundResource(R.drawable.custom_button)
                                         updateQuestion()
                                     }
                                 },1500)
@@ -155,10 +161,11 @@ class QuizActivity : AppCompatActivity() {
                                 }
                                 var handler:Handler = Handler()
                                 handler.postDelayed( {
-                                    button1.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-                                    button2.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-                                    button3.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-                                    button4.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
+                                    Log.d("RESET Tag","reset all button");
+                                    button1.setBackgroundResource(R.drawable.custom_button)
+                                    button2.setBackgroundResource(R.drawable.custom_button)
+                                    button3.setBackgroundResource(R.drawable.custom_button)
+                                    button4.setBackgroundResource(R.drawable.custom_button)
                                     updateQuestion()
                                 },1500)
                             }
@@ -171,7 +178,6 @@ class QuizActivity : AppCompatActivity() {
                             if(button2.text.toString().equals(questions.answer)) {
                                 // if user click at correct answer
                                 button2.background.setColorFilter(resources.getColor(R.color.green), PorterDuff.Mode.SRC_IN)
-
                                 val handler:Handler = Handler()
                                 handler.postDelayed(object: Runnable {
                                     @SuppressLint("ResourceAsColor")
@@ -179,8 +185,7 @@ class QuizActivity : AppCompatActivity() {
                                         // update the score
                                         score++;
                                         // change button to default for new question
-                                        button2.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-
+                                        button2.setBackgroundResource(R.drawable.custom_button)
                                         updateQuestion()
                                     }
                                 },1500)
@@ -200,10 +205,11 @@ class QuizActivity : AppCompatActivity() {
                                 }
                                 var handler:Handler = Handler()
                                 handler.postDelayed({
-                                    button1.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-                                    button2.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-                                    button3.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-                                    button4.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
+                                    Log.d("RESET Tag","reset all button");
+                                    button1.setBackgroundResource(R.drawable.custom_button)
+                                    button2.setBackgroundResource(R.drawable.custom_button)
+                                    button3.setBackgroundResource(R.drawable.custom_button)
+                                    button4.setBackgroundResource(R.drawable.custom_button)
                                     updateQuestion()
                                 },1500)
                             }
@@ -223,7 +229,7 @@ class QuizActivity : AppCompatActivity() {
                                         // update the score
                                         score++;
                                         // change button to default for new question
-                                        button3.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
+                                        button3.setBackgroundResource(R.drawable.custom_button)
                                         updateQuestion()
                                     }
                                 },1500)
@@ -243,10 +249,11 @@ class QuizActivity : AppCompatActivity() {
                                 }
                                 var handler:Handler = Handler()
                                 handler.postDelayed({
-                                    button1.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-                                    button2.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-                                    button3.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-                                    button4.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
+                                    Log.d("RESET Tag","reset all button");
+                                    button1.setBackgroundResource(R.drawable.custom_button)
+                                    button2.setBackgroundResource(R.drawable.custom_button)
+                                    button3.setBackgroundResource(R.drawable.custom_button)
+                                    button4.setBackgroundResource(R.drawable.custom_button)
                                     updateQuestion()
                                 },1500)
 
@@ -266,7 +273,7 @@ class QuizActivity : AppCompatActivity() {
                                         // update the score
                                         score++;
                                         // change button to default fot new question
-                                        button4.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
+                                        button4.setBackgroundResource(R.drawable.custom_button)
                                         updateQuestion()
                                     }
                                 },1500)
@@ -286,10 +293,11 @@ class QuizActivity : AppCompatActivity() {
                                 }
                                 var handler:Handler = Handler()
                                 handler.postDelayed({
-                                    button1.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-                                    button2.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-                                    button3.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
-                                    button4.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
+                                    Log.d("RESET Tag","reset all button");
+                                    button1.setBackgroundResource(R.drawable.custom_button)
+                                    button2.setBackgroundResource(R.drawable.custom_button)
+                                    button3.setBackgroundResource(R.drawable.custom_button)
+                                    button4.setBackgroundResource(R.drawable.custom_button)
                                     updateQuestion()
                                 },1500)
                             }

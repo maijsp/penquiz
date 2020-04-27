@@ -22,7 +22,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <!-- Dark Buttons -->
+     Dark Buttons
     <style name="ThemeOverlay.MyDarkButton" parent="ThemeOverlay.AppCompat.Dark">
         <item name="colorButtonNormal">@color/grey_500</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -48,5 +48,15 @@
     <style name="ThemeOverlay.MyTitleText" parent="AppTheme">
         <item name="android:gravity">center</item>
         <item name="android:textSize">36sp</item>
+    </style>
+    <!-- Button for answering the quiz questions  -->
+    <style name="AnswerButton" parent="Widget.AppCompat.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+    <!--  Question title style  -->
+    <style name="QuestionTitle" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">24dp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>
