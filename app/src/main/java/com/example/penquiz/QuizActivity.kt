@@ -1,30 +1,24 @@
 package com.example.penquiz
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.PorterDuff
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.penquiz.R.*
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.example.penquiz.R.id
+import com.example.penquiz.R.layout
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
-import com.google.firebase.quickstart.database.kotlin.models.Quizes
-import kotlinx.android.synthetic.main.quizes_row.*
+
 
 class QuizActivity : AppCompatActivity() {
     private lateinit var questionRef: DatabaseReference
@@ -134,13 +128,13 @@ class QuizActivity : AppCompatActivity() {
                                 // if user click at correct answer
                                 val handler:Handler = Handler()
                                 handler.postDelayed(object: Runnable {
-                                    @SuppressLint("ResourceAsColor")
                                     override fun run() {
                                         Log.i("Check", "Correct answer")
                                         // update the score
                                         score++;
-                                        // change button to default for  new  question
+                                        // change button to default for new question
                                         // button1.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
+                                        button1.background.colorFilter = null
                                         button1.setBackgroundResource(R.drawable.custom_button)
                                         updateQuestion()
                                     }
@@ -151,6 +145,7 @@ class QuizActivity : AppCompatActivity() {
                                 Log.i("Check", "Wrong answer")
                                 button1.background.setColorFilter(resources.getColor(R.color.red), PorterDuff.Mode.SRC_IN)
                                 if(button2.text.toString().equals(questions.answer)){
+                                    // var drawable = ContextCompat.getDrawable(context, R.drawable.custom_button)
                                     button2.background.setColorFilter(resources.getColor(R.color.green), PorterDuff.Mode.SRC_IN)
                                 }
                                 else if(button3.text.toString().equals(questions.answer)){
@@ -161,7 +156,12 @@ class QuizActivity : AppCompatActivity() {
                                 }
                                 var handler:Handler = Handler()
                                 handler.postDelayed( {
-                                    Log.d("RESET Tag","reset all button");
+                                    Log.d("RESET","reset all button");
+                                    button1.background.colorFilter = null
+                                    button2.background.colorFilter = null
+                                    button3.background.colorFilter = null
+                                    button4.background.colorFilter = null
+
                                     button1.setBackgroundResource(R.drawable.custom_button)
                                     button2.setBackgroundResource(R.drawable.custom_button)
                                     button3.setBackgroundResource(R.drawable.custom_button)
@@ -170,7 +170,6 @@ class QuizActivity : AppCompatActivity() {
                                 },1500)
                             }
                         }
-
                     })
                     // When user click choice 2
                     button2.setOnClickListener(object: View.OnClickListener {
@@ -180,11 +179,12 @@ class QuizActivity : AppCompatActivity() {
                                 button2.background.setColorFilter(resources.getColor(R.color.green), PorterDuff.Mode.SRC_IN)
                                 val handler:Handler = Handler()
                                 handler.postDelayed(object: Runnable {
-                                    @SuppressLint("ResourceAsColor")
+                                    //m@SuppressLint("ResourceAsColor")
                                     override fun run() {
                                         // update the score
                                         score++;
                                         // change button to default for new question
+                                        button2.background.colorFilter = null
                                         button2.setBackgroundResource(R.drawable.custom_button)
                                         updateQuestion()
                                     }
@@ -206,6 +206,11 @@ class QuizActivity : AppCompatActivity() {
                                 var handler:Handler = Handler()
                                 handler.postDelayed({
                                     Log.d("RESET Tag","reset all button");
+                                    button1.background.colorFilter = null
+                                    button2.background.colorFilter = null
+                                    button3.background.colorFilter = null
+                                    button4.background.colorFilter = null
+
                                     button1.setBackgroundResource(R.drawable.custom_button)
                                     button2.setBackgroundResource(R.drawable.custom_button)
                                     button3.setBackgroundResource(R.drawable.custom_button)
@@ -224,11 +229,12 @@ class QuizActivity : AppCompatActivity() {
                                 // if user click at correct answer
                                 val handler:Handler = Handler()
                                 handler.postDelayed(object: Runnable {
-                                    @SuppressLint("ResourceAsColor")
+                                    // @SuppressLint("ResourceAsColor")
                                     override fun run() {
                                         // update the score
                                         score++;
                                         // change button to default for new question
+                                        button3.background.colorFilter = null
                                         button3.setBackgroundResource(R.drawable.custom_button)
                                         updateQuestion()
                                     }
@@ -250,6 +256,11 @@ class QuizActivity : AppCompatActivity() {
                                 var handler:Handler = Handler()
                                 handler.postDelayed({
                                     Log.d("RESET Tag","reset all button");
+                                    button1.background.colorFilter = null
+                                    button2.background.colorFilter = null
+                                    button3.background.colorFilter = null
+                                    button4.background.colorFilter = null
+
                                     button1.setBackgroundResource(R.drawable.custom_button)
                                     button2.setBackgroundResource(R.drawable.custom_button)
                                     button3.setBackgroundResource(R.drawable.custom_button)
@@ -268,11 +279,12 @@ class QuizActivity : AppCompatActivity() {
                                 // if user click at correct answer
                                 val handler:Handler = Handler()
                                 handler.postDelayed(object: Runnable {
-                                    @SuppressLint("ResourceAsColor")
+                                    // @SuppressLint("ResourceAsColor")
                                     override fun run() {
                                         // update the score
                                         score++;
                                         // change button to default fot new question
+                                        button4.background.colorFilter = null
                                         button4.setBackgroundResource(R.drawable.custom_button)
                                         updateQuestion()
                                     }
@@ -283,6 +295,8 @@ class QuizActivity : AppCompatActivity() {
                                 Log.i("Wrong", "Wrong answer")
                                 button4.background.setColorFilter(resources.getColor(R.color.red), PorterDuff.Mode.SRC_IN)
                                 if(button1.text.toString().equals(questions.answer)){
+                                    // button1.background.setColorFilter(resources.getColor(R.color.green), PorterDuff.Mode.SRC_IN)
+                                    var drawable = ResourcesCompat.getDrawable(resources, R.drawable.custom_button, null)
                                     button1.background.setColorFilter(resources.getColor(R.color.green), PorterDuff.Mode.SRC_IN)
                                 }
                                 else if(button2.text.toString().equals(questions.answer)){
@@ -291,9 +305,16 @@ class QuizActivity : AppCompatActivity() {
                                 else if(button3.text.toString().equals(questions.answer)){
                                     button3.background.setColorFilter(resources.getColor(R.color.green), PorterDuff.Mode.SRC_IN)
                                 }
+
+
                                 var handler:Handler = Handler()
                                 handler.postDelayed({
                                     Log.d("RESET Tag","reset all button");
+                                    button1.background.colorFilter = null
+                                    button2.background.colorFilter = null
+                                    button3.background.colorFilter = null
+                                    button4.background.colorFilter = null
+
                                     button1.setBackgroundResource(R.drawable.custom_button)
                                     button2.setBackgroundResource(R.drawable.custom_button)
                                     button3.setBackgroundResource(R.drawable.custom_button)
