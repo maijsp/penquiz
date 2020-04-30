@@ -1,8 +1,8 @@
 package com.example.penquiz
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -21,6 +21,7 @@ import com.google.firebase.database.ktx.getValue
 
 
 class QuizActivity : AppCompatActivity() {
+    private var sharedPreferences: SharedPreferences? = null
     private lateinit var questionRef: DatabaseReference
     private lateinit var countRef: DatabaseReference
     private lateinit var recyclerChoice: RecyclerView
@@ -32,14 +33,13 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var button2:Button
     private lateinit var button3:Button
     private lateinit var button4:Button
-    private lateinit var buttonBack:Button
-    private lateinit var buttonNext:Button
     private lateinit var textQuesTitle:TextView
     private lateinit var testQuesDesc:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_quiz)
+
         //actionbar
         val actionbar = supportActionBar
         //set actionbar title
@@ -66,43 +66,53 @@ class QuizActivity : AppCompatActivity() {
         button2 = findViewById(id.choice2)
         button3 = findViewById(id.choice3)
         button4 = findViewById(id.choice4)
-//        buttonBack = findViewById(id.back)
-//        buttonNext= findViewById(id.next)
 
+        // call the callback object to get number of question
+        readData(object: MyCallback {
+            override fun onCallback(value: String) {
+                countQuestion = value.toInt() // change countQuestion from String to Int
+                updateQuestion() // to update question
+            }
+        })
+    }
+
+    /**
+     * Read the value from onDataChange() -- Asynchronous function
+     * @param myCallback : callback interface to get value from onDataChange()
+     */
+    fun readData(myCallback: MyCallback) {
         // count number of question
         countRef = FirebaseDatabase.getInstance().getReference().child("Quizes").child(quizId)
-        countRef.addValueEventListener(object: ValueEventListener {
+        countRef.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
             }
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                Log.d("myTag","Num question = " + dataSnapshot.child("num").value)
-                countQuestion = dataSnapshot.child("num").value.toString().toInt()
+                val numQuestion = dataSnapshot.child("num").value.toString() // get the value of key "num"
+                Log.d("INTENT", "Num Question = ${numQuestion}") // to get number of questions
+                myCallback.onCallback(numQuestion) // to send the value to outside OnDataChange : It's asynchronous
             }
-        }
-        )
-
-        updateQuestion()
-
+        })
     }
 
-    /*
-    This function is used to  update the question
+    /**
+     * updateQuestion() is used to update the question of the quiz
      */
     fun updateQuestion() {
-        textQuesTitle.text = "Question ${(total+2)}"
-        if (total > countQuestion) {
+        total++;
+        if (total == countQuestion) {
             // go to results activity
-            val intent = Intent(this, ResultActivity::class.java).apply {
-                putExtra("result", total);
-            }
+            Log.d("INTENT", "go to result activity ${total} ${countQuestion}")
+            val intent = Intent(this, ResultActivity::class.java) // create a new intent
+            intent.putExtra("score", score) // put the score to the result activity
             startActivity(intent)
 
         } else {
-            total++;
+            Log.d("INTENT", "Update question ${total} of ${countQuestion}") // To check question counter
+            textQuesTitle.text = "Question ${(total+1)}"
             // go to next question
             // reference to the quizID
-            questionRef = FirebaseDatabase.getInstance().getReference().child("Quizes").child(quizId).child("Questions").child(total.toString())
+            questionRef = FirebaseDatabase.getInstance().getReference().child("Quizes").child(quizId).child("Questions").child(total.toString()) // To find the path to FirebaseDatabase of quiz
             Log.d("myTag", questionRef.toString())
             questionRef.addValueEventListener(object: ValueEventListener {
                 override fun onCancelled(databaseError: DatabaseError) {
@@ -133,7 +143,6 @@ class QuizActivity : AppCompatActivity() {
                                         // update the score
                                         score++;
                                         // change button to default for new question
-                                        // button1.background.setColorFilter(resources.getColor(R.color.lightgray), PorterDuff.Mode.SRC_IN)
                                         button1.background.colorFilter = null
                                         button1.setBackgroundResource(R.drawable.custom_button)
                                         updateQuestion()
@@ -229,7 +238,6 @@ class QuizActivity : AppCompatActivity() {
                                 // if user click at correct answer
                                 val handler:Handler = Handler()
                                 handler.postDelayed(object: Runnable {
-                                    // @SuppressLint("ResourceAsColor")
                                     override fun run() {
                                         // update the score
                                         score++;
@@ -279,7 +287,6 @@ class QuizActivity : AppCompatActivity() {
                                 // if user click at correct answer
                                 val handler:Handler = Handler()
                                 handler.postDelayed(object: Runnable {
-                                    // @SuppressLint("ResourceAsColor")
                                     override fun run() {
                                         // update the score
                                         score++;
