@@ -105,6 +105,7 @@ class QuizActivity : AppCompatActivity() {
             Log.d("INTENT", "go to result activity ${total} ${countQuestion}")
             val intent = Intent(this, ResultActivity::class.java) // create a new intent
             intent.putExtra("score", score) // put the score to the result activity
+            intent.putExtra("numQuestion", countQuestion)
             startActivity(intent)
 
         } else {

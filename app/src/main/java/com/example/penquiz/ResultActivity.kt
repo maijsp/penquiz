@@ -15,8 +15,15 @@ class ResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_result)
 
         var score: Int = intent.getIntExtra("score", 0)
+        var numQuestion: Int = intent.getIntExtra("numQuestion", 0)
         Log.i("SCORE", "Score receivce  : ${score}")
+        Log.i("SCORE", "Num question receivce  : ${numQuestion}")
+
         var scoreTextView = findViewById<TextView>(R.id.score)
-        scoreTextView.setText(score.toString())
+        scoreTextView.setText("${score}" + " / " + "${numQuestion}")
+    }
+
+    fun setScoreDescription(score: Int, numQuestion: Int) {
+
     }
 }
