@@ -21,4 +21,6 @@
     <color name="yellow">#fbbf04</color>
     <color name="orange">#f87956</color>
     <color name="pink">#fca98f</color>
+    <color name="darkgrey">#333333</color>
+    <color name="lightpink">#FFF1EE</color>
 </resources>

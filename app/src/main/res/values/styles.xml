@@ -53,11 +53,18 @@
     <!-- Button for answering the quiz questions  -->
     <style name="AnswerButton" parent="Widget.AppCompat.Button">
         <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/pink</item>
     </style>
     <!--  Question title style  -->
     <style name="QuestionTitle" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">24dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--  Android go back to main menu style  -->
+    <style name="BackToMain" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/pink</item>
         <item name="android:textStyle">bold</item>
     </style>
 </resources>
