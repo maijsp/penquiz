@@ -43,8 +43,8 @@ class ContactFragment  : Fragment(), OnMapReadyCallback,View.OnClickListener {
             android.R.string.yes, Toast.LENGTH_SHORT).show()
     }
 
-//    var database = FirebaseDatabase.getInstance()
-//    var myRef: DatabaseReference = database.getReference()  //point to the root named "penquiz3d349"
+    var database = FirebaseDatabase.getInstance()
+    var myRef: DatabaseReference = database.getReference()  //point to the root named "penquiz3d349"
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -131,13 +131,13 @@ class ContactFragment  : Fragment(), OnMapReadyCallback,View.OnClickListener {
         auth = FirebaseAuth.getInstance()
         val senderID = auth.currentUser?.uid
         if (TextUtils.isEmpty(message)){
-            textFeedback.setError("Enter Your Message");
+            textFeedback.setError(getString(R.string.Error_message));
             textFeedback.requestFocus();
             return;
         }
 
         //database.child("Messages").child("senderID").child(senderID.toString()).child(message).push()
-//        myRef.child("Messages").child("sender ID").child(senderID.toString()).push().setValue(message)
+        myRef.child("Messages").child("sender ID").child(senderID.toString()).push().setValue(message)
 
         var builder = AlertDialog.Builder(this.context)
         // Set the alert dialog title
