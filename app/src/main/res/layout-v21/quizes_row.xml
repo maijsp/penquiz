@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/list_view"
     android:elevation="1dp"
-    android:layout_margin="10dp">
+    android:layout_margin="5dp">
 
     <LinearLayout
         android:id="@+id/container"

@@ -73,4 +73,7 @@ dependencies {
 
     // circular progress bar
     implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
+
+    // picasso to retrieve image file
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

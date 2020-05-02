@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.penquiz.QuizActivity
 import com.example.penquiz.R
 import com.google.firebase.quickstart.database.kotlin.models.Quizes
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.quizes_row.view.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -29,6 +31,8 @@ public class QuizAdapter(internal var dataset: List<Quizes>) : RecyclerView.Adap
         fun bind(quiz: Quizes) {
             itemView.apply {
                 container.animation = AnimationUtils.loadAnimation(context, R.anim.fade_scale_animation)
+                var image:ImageView = findViewById(R.id.quizimage)
+                Picasso.get().load(quiz.imageURL).into(image)
                 quiz_name.text = quiz.title
                 quiz_detail.text = "Number of Question : ${quiz.num.toString()}"
                 itemView.setOnClickListener(object: View.OnClickListener{
