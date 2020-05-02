@@ -9,16 +9,20 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+import com.daimajia.numberprogressbar.NumberProgressBar
 import com.example.penquiz.R.id
 import com.example.penquiz.R.layout
 import com.example.penquiz.callback.MyCallback
+import com.example.penquiz.model.Questions
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
+import kotlinx.android.synthetic.main.activity_quiz.*
 
 
 class QuizActivity : AppCompatActivity() {
@@ -29,6 +33,7 @@ class QuizActivity : AppCompatActivity() {
     private var countQuestion = 0
     private var total = -1
     private var score = 0
+    private var progressnum = 0
 
     private lateinit var button1:Button
     private lateinit var button2:Button
@@ -36,6 +41,7 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var button4:Button
     private lateinit var textQuesTitle:TextView
     private lateinit var testQuesDesc:TextView
+    private lateinit var progressBar: RoundCornerProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +71,7 @@ class QuizActivity : AppCompatActivity() {
         button2 = findViewById(id.choice2)
         button3 = findViewById(id.choice3)
         button4 = findViewById(id.choice4)
+        progressBar = findViewById(id.progressbar)
 
         // call the callback object to get number of question
         readData(object: MyCallback {
@@ -78,6 +85,7 @@ class QuizActivity : AppCompatActivity() {
     /**
      * Read the value from onDataChange() -- Asynchronous function
      * @param myCallback : callback interface to get value from onDataChange()
+     * @param id : quizId
      */
     fun readData(myCallback: MyCallback, id: Int) {
         // count number of question
@@ -100,6 +108,8 @@ class QuizActivity : AppCompatActivity() {
      */
     fun updateQuestion(id:Int) {
         total++;
+        progressBar.max = countQuestion.toFloat()
+        progressBar.progress = total+1.toFloat()
         if (total == countQuestion) {
             // go to results activity
             Log.d("INTENT", "go to result activity ${total} ${countQuestion}")

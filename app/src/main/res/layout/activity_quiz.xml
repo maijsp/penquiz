@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/quiz_background"
-        android:padding="20dp">
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,6 +22,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:id="@+id/progressbar"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    app:rcBackgroundColor="@color/lightpink"
+                    app:rcBackgroundPadding="2dp"
+                    app:rcMax="100"
+                    app:rcProgress="40"
+                    app:rcProgressColor="@color/pink"
+                    app:rcRadius="20dp"
+                    app:rcSecondaryProgress="60"
+                    app:rcSecondaryProgressColor="@color/lightpink" />
 
                 <TextView
                     android:id="@+id/ques_title"

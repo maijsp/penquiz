@@ -60,11 +60,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.3.0'
 
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
-    //add for databasereference
+    // Firebase Reference
     implementation 'com.google.firebase:firebase-database:19.2.1'
 
-    // add the Firebase SDK for Google Analytics
-    // implementation 'com.google.firebase:firebase-analytics:17.2.2'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -76,4 +74,9 @@ dependencies {
 
     // picasso to retrieve image file
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // Progress Bar
+    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
+    implementation 'com.akexorcist:round-corner-progress-bar:2.1.0'
+
 }

@@ -31,6 +31,7 @@ public class QuizAdapter(internal var dataset: List<Quizes>) : RecyclerView.Adap
         fun bind(quiz: Quizes) {
             itemView.apply {
                 container.animation = AnimationUtils.loadAnimation(context, R.anim.fade_scale_animation)
+                quizimage.animation = AnimationUtils.loadAnimation(context, R.anim.fade_transition_animation)
                 var image:ImageView = findViewById(R.id.quizimage)
                 Picasso.get().load(quiz.imageURL).into(image)
                 quiz_name.text = quiz.title
@@ -92,8 +93,5 @@ public class QuizAdapter(internal var dataset: List<Quizes>) : RecyclerView.Adap
                 notifyDataSetChanged()
             }
         }
-    }
-    public interface QuizListener{
-        fun onQuizClick(position: Int)
     }
 }
