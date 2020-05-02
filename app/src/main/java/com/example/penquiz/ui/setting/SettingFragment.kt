@@ -8,6 +8,7 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -15,11 +16,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.example.penquiz.R
@@ -50,12 +54,9 @@ class SettingFragment: Fragment(){
     private lateinit var ButtonEng: Button
     private lateinit var username: TextView
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-
-      // Don't use recreate use intent instead
+        // Don't use recreate use intent instead
         // but how to use intent in this?
         // sth like this
 
@@ -103,14 +104,10 @@ class SettingFragment: Fragment(){
             addOperation(it)
         })
 
-
         return root
     }
 
-
-
     fun addOperation(v: View?) {
-
         val options = arrayOf<String>("Take Photo","Choose from gallery","Cancel")
         val builder = AlertDialog.Builder(this.context)
         builder.setTitle("Choose your profile picture")
@@ -169,7 +166,6 @@ class SettingFragment: Fragment(){
 
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode != RESULT_CANCELED){
             if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
@@ -186,8 +182,7 @@ class SettingFragment: Fragment(){
                 var user: FirebaseUser? =FirebaseAuth.getInstance().currentUser
                 val uri: Uri? = data.data
                 var uid= FirebaseAuth.getInstance().currentUser?.uid
-                var reference: StorageReference = FirebaseStorage.getInstance().getReference()
-                    .child("profileImage") //.child(uid+ ".jpg");
+                var reference: StorageReference = FirebaseStorage.getInstance().getReference().child("profileImage") //.child(uid+ ".jpg");
                 var uploadTask =  reference.putFile(uri!!)
 
                 //try
@@ -196,16 +191,12 @@ class SettingFragment: Fragment(){
                         mDatabase.child(user!!.uid.toString()).child("image").setValue(it.toString())
                         Toast.makeText(activity!!.getApplicationContext(),"success!!"+it.toString(),Toast.LENGTH_SHORT).show()
                         Log.d("DIRECTLINK",it.toString())
-                        Picasso.get()
-                            .load(it)
-                            .into(imageProfile)
+                        Picasso.get().load(it).into(imageProfile)
                     }
                 }
 
             }
-
         }
-
     }
 
     private fun handleUpload(imageBitmap: Bitmap) {

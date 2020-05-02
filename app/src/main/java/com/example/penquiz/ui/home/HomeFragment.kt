@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
 
         // set layout
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        
+
         // set adapter corresponding to the search query
         searchInput.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {

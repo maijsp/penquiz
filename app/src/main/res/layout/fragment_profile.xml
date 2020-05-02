@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    style="">
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -18,26 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <!-- android:scaleType="fitCenter, centerInside" : to make the image the same size as the button
-            android:adjustViewBounds="true" if your image has unequal height/width.
-            app:srcCompat="@drawable/logo"
-            success
-            -->
-
-            <!--            <de.hdodenhof.circleimageview.CircleImageView-->
-
-            <!--                android:id="@+id/camera_image"-->
-            <!--                android:layout_width="120dp"-->
-            <!--                android:layout_height="120dp"-->
-            <!--                android:layout_gravity="center"-->
-            <!--                android:layout_marginTop="30dp"-->
-            <!--                android:adjustViewBounds="true"-->
-            <!--                android:background="@drawable/roundcorner"-->
-            <!--                android:onClick="addOperation"-->
-
-            <!--                android:src="@drawable/ic_setting_camera"-->
-            <!--                tools:ignore="VectorDrawableCompat" />-->
-
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/camera_image"
@@ -51,7 +32,6 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_setting_camera" />
 
-            <!-- android:scaleType="centerCrop"-->
             <TextView
                 android:id="@+id/text_guide"
                 android:layout_width="wrap_content"
@@ -59,6 +39,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="@string/setting_description"
+                android:fontFamily="@font/dmsans"
                 tools:text="@string/setting_description" />
 
             <TextView
@@ -68,6 +49,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:text="@string/Show_username"
+                android:textColor="@color/darkgrey"
+                android:fontFamily="@font/dmsans"
                 android:textSize="20sp" />
 
 
@@ -78,6 +61,9 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
                 android:text="@string/Language_choice"
+                android:fontFamily="@font/dmsans"
+                android:textColor="@color/blueshade"
+                android:textStyle="bold"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -111,31 +97,30 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-
+                    android:orientation="vertical"
+                    android:clipToPadding="false">
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/button_thai"
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="44dp"
+                        android:background="@drawable/button"
+                        android:textColor="@color/pink"
+                        android:backgroundTint="@color/lightpink"
                         android:text="@string/english_button" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/button_english"
-                        android:layout_width="120dp"
+                        android:layout_width="117dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="89dp"
+                        android:background="@drawable/button"
                         android:text="@string/Thai_button"
-
-
-                        />
-
+                        android:textColor="@color/pink"
+                        android:backgroundTint="@color/lightpink"/>
                 </LinearLayout>
-
             </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
 

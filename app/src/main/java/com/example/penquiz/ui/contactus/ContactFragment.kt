@@ -48,19 +48,11 @@ class ContactFragment  : Fragment(), OnMapReadyCallback,View.OnClickListener {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-
         googlemapView?.onSaveInstanceState(outState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-//        contactViewModel = ViewModelProviders.of(this).get(ContactViewModel::class.java)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_contactus,container,false)
-//
-//        val textView: TextView = root.findViewById(R.id.text_contact)
-//        contactViewModel.text.observe(this, Observer {
-//            textView.text = it
-//        })
 
         googlemapView = root.findViewById(R.id.mapView)
         googlemapView?.onCreate(savedInstanceState)
@@ -72,21 +64,7 @@ class ContactFragment  : Fragment(), OnMapReadyCallback,View.OnClickListener {
         //database = FirebaseDatabase.getInstance().getReference();
         postFeedback.setOnClickListener(this)
 
-//        postFeedback.setOnClickListener(View.OnClickListener {
-//            fun onClick(v: View){
-//                val message: String = textFeedback.getText().toString()
-//                if (TextUtils.isEmpty(message)){
-//                    textFeedback.setError("Enter Your Message");
-//                    textFeedback.requestFocus();
-//                    return;
-//                }
-//                database.child("Messages").child("senderID").child(senderID.toString()).child(message).push()
-//
-//            }
-//        })
         return root
-//// Inflate the layout for this fragment
-////return inflater.inflate(R.layout.fragment_contactus, container, false)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -136,7 +114,6 @@ class ContactFragment  : Fragment(), OnMapReadyCallback,View.OnClickListener {
             return;
         }
 
-        //database.child("Messages").child("senderID").child(senderID.toString()).child(message).push()
         myRef.child("Messages").child("sender ID").child(senderID.toString()).push().setValue(message)
 
         var builder = AlertDialog.Builder(this.context)
@@ -147,33 +124,8 @@ class ContactFragment  : Fragment(), OnMapReadyCallback,View.OnClickListener {
         builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = positiveButtonClick))
         // Finally, make the alert dialog using builder
         val dialog: AlertDialog = builder.create()
-        //val messageText = dialog.findViewById<View>(android.R.id.message) as TextView
-        //val messageTitle = dialog.findViewById<View>(android.R.id.title) as TextView
-        //messageText.setGravity(Gravity.CENTER);
-        //messageTitle.setGravity(Gravity.CENTER);
-        // Display the alert dialog on app interface
         dialog.show()
     }
-
-//    fun basicAlert(view: View){
-//
-//        var builder = AlertDialog.Builder(this.context)
-//
-//        with(builder)
-//        {
-//            setTitle("Androidly Alert")
-//            setMessage("We have a message")
-//            setPositiveButton("OK", DialogInterface.OnClickListener(function = positiveButtonClick))
-//            //setNegativeButton(android.R.string.no, negativeButtonClick)
-//            //setNeutralButton("Maybe", neutralButtonClick)
-//            show()
-//        }
-//
-//
-//    }
-
-
-
 }
 
 
