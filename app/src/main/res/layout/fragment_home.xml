@@ -5,11 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleView_main"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="64dp" />
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <EditText
+            android:drawableLeft="@drawable/ic_search_gray_24dp"
+            android:drawablePadding="8dp"
+            android:id="@+id/searchtext"
+            android:textColor="@color/darkgrey"
+            android:fontFamily="@font/dmsans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="search"
+            android:background="@drawable/search_input_style"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleView_main"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

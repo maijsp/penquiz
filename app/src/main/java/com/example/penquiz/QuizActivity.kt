@@ -16,6 +16,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.penquiz.R.id
 import com.example.penquiz.R.layout
+import com.example.penquiz.callback.MyCallback
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 
@@ -27,8 +28,8 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var recyclerChoice: RecyclerView
     private var countQuestion = 0
     private var total = -1
-    private var quizId = "0"
     private var score = 0
+
     private lateinit var button1:Button
     private lateinit var button2:Button
     private lateinit var button3:Button
@@ -44,20 +45,18 @@ class QuizActivity : AppCompatActivity() {
         val actionbar = supportActionBar
         //set actionbar title
 
+        // Receive data
+        val intent = intent
+        var quiztitle = intent.getStringExtra("quizname")
+        var quizId = intent.getIntExtra("quizid", -1)
         // Test passed data
-        val quizname = intent?.getStringExtra("quizname")
-        var text = findViewById(id.ques_title) as TextView
-        actionbar!!.title = quizname.toString()
+        actionbar!!.title = quiztitle
+        Log.d("RECEIVE", "RECEIVE ${quizId} ${quiztitle}")
 
         //set back button
         actionbar.setDisplayHomeAsUpEnabled(true)
 
-        quizId = intent.getIntExtra("position", 0)?.plus(1).toString()
-        Toast.makeText(
-            this,
-            "Your position.+ ${intent?.getIntExtra("position", 0)?.plus(1)}",
-            Toast.LENGTH_LONG
-        ).show();
+        // Toast.makeText(this, "Your quizid.+ ${quizId}", Toast.LENGTH_LONG).show();
 
         // declare reference to button in activity_quiz.xml
         textQuesTitle = findViewById(id.ques_title)
@@ -71,18 +70,19 @@ class QuizActivity : AppCompatActivity() {
         readData(object: MyCallback {
             override fun onCallback(value: String) {
                 countQuestion = value.toInt() // change countQuestion from String to Int
-                updateQuestion() // to update question
+                updateQuestion(quizId) // to update question
             }
-        })
+        }, quizId)
     }
 
     /**
      * Read the value from onDataChange() -- Asynchronous function
      * @param myCallback : callback interface to get value from onDataChange()
      */
-    fun readData(myCallback: MyCallback) {
+    fun readData(myCallback: MyCallback, id: Int) {
         // count number of question
-        countRef = FirebaseDatabase.getInstance().getReference().child("Quizes").child(quizId)
+        countRef = FirebaseDatabase.getInstance().getReference().child("Quizes").child(id.toString())
+        Log.d("QUIZ", "${countRef}")
         countRef.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 TODO("Not yet implemented")
@@ -98,7 +98,7 @@ class QuizActivity : AppCompatActivity() {
     /**
      * updateQuestion() is used to update the question of the quiz
      */
-    fun updateQuestion() {
+    fun updateQuestion(id:Int) {
         total++;
         if (total == countQuestion) {
             // go to results activity
@@ -113,7 +113,7 @@ class QuizActivity : AppCompatActivity() {
             textQuesTitle.text = "Question ${(total+1)}"
             // go to next question
             // reference to the quizID
-            questionRef = FirebaseDatabase.getInstance().getReference().child("Quizes").child(quizId).child("Questions").child(total.toString()) // To find the path to FirebaseDatabase of quiz
+            questionRef = FirebaseDatabase.getInstance().getReference().child("Quizes").child(id.toString()).child("Questions").child(total.toString()) // To find the path to FirebaseDatabase of quiz
             Log.d("myTag", questionRef.toString())
             questionRef.addValueEventListener(object: ValueEventListener {
                 override fun onCancelled(databaseError: DatabaseError) {
@@ -146,7 +146,7 @@ class QuizActivity : AppCompatActivity() {
                                         // change button to default for new question
                                         button1.background.colorFilter = null
                                         button1.setBackgroundResource(R.drawable.custom_button)
-                                        updateQuestion()
+                                        updateQuestion(id)
                                     }
                                 },1500)
                             }
@@ -176,7 +176,7 @@ class QuizActivity : AppCompatActivity() {
                                     button2.setBackgroundResource(R.drawable.custom_button)
                                     button3.setBackgroundResource(R.drawable.custom_button)
                                     button4.setBackgroundResource(R.drawable.custom_button)
-                                    updateQuestion()
+                                    updateQuestion(id)
                                 },1500)
                             }
                         }
@@ -196,7 +196,7 @@ class QuizActivity : AppCompatActivity() {
                                         // change button to default for new question
                                         button2.background.colorFilter = null
                                         button2.setBackgroundResource(R.drawable.custom_button)
-                                        updateQuestion()
+                                        updateQuestion(id)
                                     }
                                 },1500)
                             }
@@ -225,7 +225,7 @@ class QuizActivity : AppCompatActivity() {
                                     button2.setBackgroundResource(R.drawable.custom_button)
                                     button3.setBackgroundResource(R.drawable.custom_button)
                                     button4.setBackgroundResource(R.drawable.custom_button)
-                                    updateQuestion()
+                                    updateQuestion(id)
                                 },1500)
                             }
                         }
@@ -245,7 +245,7 @@ class QuizActivity : AppCompatActivity() {
                                         // change button to default for new question
                                         button3.background.colorFilter = null
                                         button3.setBackgroundResource(R.drawable.custom_button)
-                                        updateQuestion()
+                                        updateQuestion(id)
                                     }
                                 },1500)
                             }
@@ -274,7 +274,7 @@ class QuizActivity : AppCompatActivity() {
                                     button2.setBackgroundResource(R.drawable.custom_button)
                                     button3.setBackgroundResource(R.drawable.custom_button)
                                     button4.setBackgroundResource(R.drawable.custom_button)
-                                    updateQuestion()
+                                    updateQuestion(id)
                                 },1500)
 
                         }
@@ -294,7 +294,7 @@ class QuizActivity : AppCompatActivity() {
                                         // change button to default fot new question
                                         button4.background.colorFilter = null
                                         button4.setBackgroundResource(R.drawable.custom_button)
-                                        updateQuestion()
+                                        updateQuestion(id)
                                     }
                                 },1500)
                             }
@@ -327,7 +327,7 @@ class QuizActivity : AppCompatActivity() {
                                     button2.setBackgroundResource(R.drawable.custom_button)
                                     button3.setBackgroundResource(R.drawable.custom_button)
                                     button4.setBackgroundResource(R.drawable.custom_button)
-                                    updateQuestion()
+                                    updateQuestion(id)
                                 },1500)
                             }
                         }
