@@ -109,7 +109,7 @@ class QuizActivity : AppCompatActivity() {
     fun updateQuestion(id:Int) {
         total++;
         progressBar.max = countQuestion.toFloat()
-        progressBar.progress = total+1.toFloat()
+        progressBar.progress = total.toFloat()
         if (total == countQuestion) {
             // go to results activity
             Log.d("INTENT", "go to result activity ${total} ${countQuestion}")

@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
     private lateinit var quizManager: RecyclerView.LayoutManager
     private lateinit var recyclerView: RecyclerView
 
-    var dataList : MutableList<Quizes> = ArrayList() // To keep quiz data retrieve from database
+    private lateinit var dataList : MutableList<Quizes> // To keep Quizes object retrieve from database
 
     companion object {
         private const val TAG = "HOME"
@@ -43,7 +43,10 @@ class HomeFragment : Fragment() {
         // Init rootView
         var rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
-        // Retreive data from firebase https://www.youtube.com/watch?v=OvDZVV5CbQg
+        // Init dataList
+        dataList = ArrayList()
+
+        // Retreive data from firebase https://www.youtube.com/watch?v=OvDZVV5CbQg to dataList
         fetchData(object: QuizCallBack{
             override fun onCallBack(quizes: List<Quizes>) {
                 dataList = quizes as MutableList<Quizes>
@@ -55,9 +58,11 @@ class HomeFragment : Fragment() {
         // Init view from root view
         recyclerView = rootView.findViewById(R.id.recycleView_main)
         searchInput = rootView.findViewById(R.id.searchtext)
+
         // set layout
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        // set adapter
+        
+        // set adapter corresponding to the search query
         searchInput.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // perform filter when text changed
@@ -71,6 +76,11 @@ class HomeFragment : Fragment() {
         })
         return rootView
     }
+
+    /**
+     * fetchData is used to get Quizes object from firebase
+     * @param quizCallBack the callback to get value one onDataChange performed
+     */
     fun fetchData(quizCallBack: QuizCallBack) {
         // Fetching data from firebase
         database = FirebaseDatabase.getInstance()

@@ -23,20 +23,12 @@
     <string name="hint_password">Password</string>
     <string name="hint_conf_password">Re-enter password</string>
 
-    <string name="register">ลงทะเบียน</string>
-    <string name="hint_password">รหัสผ่าน</string>
-    <string name="hint_conf_password">รหัสผ่านอีกครั้ง</string>
-    <string name="cancel_th">ยกเลิก</string>
-
     <string name="cancel">CANCEL</string>
     <string name="confirm_register">Confirm</string>
-    <string name="hint_user_id_th">ไอดี</string>
     <string name="hint_user_id">User ID</string>
     <!--    -->
-    <string name="get_custom_token">Get Token</string>
     <string name="sign_in">Sign In</string>
     <string name="create_account">Create Account</string>
-    <string name="send_link">Send Link</string>
     <string name="sign_out">Sign Out</string>
     <string name="verify_email">Verify Email</string>
     <string name="disconnect">Disconnect</string>

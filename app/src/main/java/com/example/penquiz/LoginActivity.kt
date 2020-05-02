@@ -33,24 +33,8 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        updateUI(currentUser)
+
     }
-
-    private fun updateUI(user: FirebaseUser?) {
-        if (user != null) {
-            status.text = getString(R.string.emailpassword_status_fmt, user.email, user.isEmailVerified)
-//            detail.text = getString(R.string.firebase_status_fmt, user.uid)
-
-//            emailPasswordButtons.visibility = View.GONE
-//            emailPasswordFields.visibility = View.GONE
-//            verifyEmailButton.isEnabled = !user.isEmailVerified
-        } else {
-            status.text = "Enter email and password to login"
-//            emailPasswordButtons.visibility = View.VISIBLE
-//            emailPasswordFields.visibility = View.VISIBLE
-        }
-    }
-
     /*
     If users want to create the account, it will direct to another
      */
@@ -67,15 +51,12 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
         if (!validateForm()) {
             return
         }
-
         // [START sign_in_with_email]
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
+                    // Sign in success, Go to MainActivity
                     Log.d(TAG, "signInWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 } else {
@@ -83,7 +64,6 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
-                    updateUI(null)
                 }
 
                 // [START_EXCLUDE]
@@ -97,7 +77,6 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
 
     private fun signOut() {
         auth.signOut()
-        updateUI(null)
     }
 
     private fun sendEmailVerification() {
@@ -107,12 +86,10 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
         // Send verification email
         // [START send_email_verification]
         val user = auth.currentUser
-        user?.sendEmailVerification()
-            ?.addOnCompleteListener(this) { task ->
+        user?.sendEmailVerification()?.addOnCompleteListener(this) { task ->
                 // [START_EXCLUDE]
                 // Re-enable button
                 //verifyEmailButton.isEnabled = true
-
                 if (task.isSuccessful) {
                     Toast.makeText(baseContext,
                         "Verification email sent to ${user.email} ",

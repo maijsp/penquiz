@@ -19,27 +19,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ResultActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".QuizActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".ResultActivity" android:theme="@style/ResultActivity"/>
+        <activity android:name=".QuizActivity" android:theme="@style/QuizActivity"/>
+        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/MyMaterialTheme"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.setting.SettingFragment"
-           android:label="@string/label_setting"/>
+        <activity android:name=".ui.setting.SettingFragment" android:label="@string/label_setting"/>
 
 <!--
 android.support.v4.content.FileProvider -> it's not work
