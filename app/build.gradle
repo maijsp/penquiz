@@ -60,27 +60,32 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.3.0'
 
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
-    //add for databasereference
+    // Firebase Reference
     implementation 'com.google.firebase:firebase-database:19.2.1'
 
-    // add the Firebase SDK for Google Analytics
-    // implementation 'com.google.firebase:firebase-analytics:17.2.2'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.mediarouter:mediarouter:1.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
+
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     
     //for using picasso
     //noinspection GradleCompatible
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.squareup.picasso:picasso:2.71828'
-
     implementation 'com.github.bumptech.glide:glide:3.7.0'
 
     implementation 'com.google.firebase:firebase-storage-ktx:19.1.1'
 
+    // circular progress bar
+    implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
 
+    // picasso to retrieve image file
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // Progress Bar
+    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
+    implementation 'com.akexorcist:round-corner-progress-bar:2.1.0'
 }

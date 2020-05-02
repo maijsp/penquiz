@@ -1,4 +1,4 @@
-package com.example.penquiz
+package com.example.penquiz.model
 
 public class Questions {
     var answer: String = ""

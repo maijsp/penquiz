@@ -25,7 +25,6 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
 //        verifyEmailButton.setOnClickListener(this)
 
         // [START initialize_auth]
-        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
         // [END initialize_auth]
     }

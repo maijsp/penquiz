@@ -15,4 +15,12 @@
     <color name="lightblue">#3853f8</color>
     <color name="darkblue">#223295</color>
     <color name="green">#4CAF50</color>
+
+    <!-- New color >> Added by Mai -->
+    <color name="blueshade">#4847a5</color>
+    <color name="yellow">#fbbf04</color>
+    <color name="orange">#f87956</color>
+    <color name="pink">#fca98f</color>
+    <color name="darkgrey">#333333</color>
+    <color name="lightpink">#FFF1EE</color>
 </resources>

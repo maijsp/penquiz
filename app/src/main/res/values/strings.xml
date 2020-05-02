@@ -22,6 +22,12 @@
     <string name="register">Register</string>
     <string name="hint_password">Password</string>
     <string name="hint_conf_password">Re-enter password</string>
+
+    <string name="register">ลงทะเบียน</string>
+    <string name="hint_password">รหัสผ่าน</string>
+    <string name="hint_conf_password">รหัสผ่านอีกครั้ง</string>
+    <string name="cancel_th">ยกเลิก</string>
+
     <string name="cancel">CANCEL</string>
     <string name="confirm_register">Confirm</string>
     <string name="hint_user_id_th">ไอดี</string>
@@ -88,14 +94,14 @@
     <string name="button">Button</string>
     <string name="quiz_name">quizename</string>
 
-<!--    Contact fragment-->
+    <!--    Contact fragment-->
     <string name="sendfeedback">SEND</string>
     <string name="textfeedback">write feedback</string>
     <string name="contact_us">Contact us</string>
-<!--    Setting fragment -->
+    <!--    Setting fragment -->
     <string name="setting_profiel">Setting</string>
 
-<!--    QuizActivity-->
+    <!--    QuizActivity-->
     <string name="back">back</string>
     <string name="next">next</string>
     <string name="choice1">choice1</string>
