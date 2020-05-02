@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-   <external-path name="ay_images" path ="Android/data/com.coutocode.cameraexample/files/Pictures" />
-</PreferenceScreen>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+   <external-files-path name="my_images" path ="./" />
+</paths>
+
+
+<!--path ="Android/data/com.coutocode.cameraexample/files/Pictures"-->

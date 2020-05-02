@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">penquiz</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name" translatable="false">penquiz</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="action_settings" translatable="false">Settings</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
@@ -17,18 +17,19 @@
     <!--    My String   -->
     <!-- LoginActivity -->
     <string name="emailpassword_title_text">Log in</string>
-    <string name="emailpassword_title_text_th">เข้าสู่ระบบ</string>
+
     <!-- RegisterActivity -->
+    <string name="register">Register</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_conf_password">Re-enter password</string>
+
     <string name="register">ลงทะเบียน</string>
-    <string name="register_th">Register</string>
     <string name="hint_password">รหัสผ่าน</string>
-    <string name="hint_password_th">Password</string>
-    <string name="hint_conf_password_th">Re-enter password</string>
     <string name="hint_conf_password">รหัสผ่านอีกครั้ง</string>
     <string name="cancel_th">ยกเลิก</string>
+
     <string name="cancel">CANCEL</string>
-    <string name="confirm_register">ตกลง</string>
-    <string name="confirm_register_th">Confirm</string>
+    <string name="confirm_register">Confirm</string>
     <string name="hint_user_id_th">ไอดี</string>
     <string name="hint_user_id">User ID</string>
     <!--    -->
@@ -91,7 +92,6 @@
     <string name="textview">TextView</string>
     <string name="todo">TODO</string>
     <string name="button">Button</string>
-    <string name="start_button">START</string>
     <string name="quiz_name">quizename</string>
 
     <!--    Contact fragment-->
@@ -114,5 +114,12 @@
     <!-- Added by Aom, Somoh - Setting Fragment -->
     <string name="setting_description">Change Profile Picture</string>
     <string name="save_button">Save</string>
+    <string name="Language_choice">Select Language:</string>
+    <string name="english_button">English</string>
+    <string name="Thai_button">Thai</string>
+    <string name="label_setting">Setting</string>
+    <string name="Error_message">\"Enter Your Message \"</string>
+    <string name="Show_username">Username</string>
+
 
 </resources>
