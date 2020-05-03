@@ -87,7 +87,7 @@
 
     <!--    Contact fragment-->
     <string name="sendfeedback">SEND</string>
-    <string name="textfeedback">write feedback</string>
+    <string name="textfeedback">Give some feedback to us</string>
     <string name="contact_us">Contact us</string>
     <!--    Setting fragment -->
     <string name="setting_profile">Setting</string>
@@ -114,5 +114,8 @@
 
     <!-- Setting at Main   -->
     <string name="sign_out">Sign out</string>
+    <string name="back_to_home">Back to Home</string>
+    <string name="searchtext">Search</string>
+
 
 </resources>

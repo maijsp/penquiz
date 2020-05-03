@@ -25,8 +25,9 @@
                 android:layout_marginEnd="30dp"
                 android:gravity="start"
                 android:text="@string/contact_us"
-                android:textColor="#000000"
-                android:textSize="30sp" />
+                android:textColor="@color/blueshade"
+                android:textStyle="bold"
+                android:textSize="28sp" />
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mapView"
@@ -43,7 +44,9 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="30dp"
                 android:autofillHints=""
-                android:background="#0D817979"
+                android:background="@drawable/custom_button"
+                android:padding="15dp"
+                android:backgroundTint="@color/lightgray"
                 android:gravity="top|start"
                 android:hint="@string/textfeedback"
                 android:inputType="textMultiLine"

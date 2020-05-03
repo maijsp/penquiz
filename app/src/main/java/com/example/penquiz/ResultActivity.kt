@@ -19,28 +19,28 @@ class ResultActivity : AppCompatActivity() {
         setContentView(R.layout.activity_result)
 
         // get data sent from QuizActivity
-        var score: Int = intent.getIntExtra("score", 0)
-        var numQuestion: Int = intent.getIntExtra("numQuestion", 0)
+        val score: Int = intent.getIntExtra("score", 0)
+        val numQuestion: Int = intent.getIntExtra("numQuestion", 0)
         Log.i("SCORE", "Score receivce  : ${score}")
         Log.i("SCORE", "Num question receivce  : ${numQuestion}")
 
         // Get views
-        var scoreTextView = findViewById<TextView>(R.id.score)
-        var correct = findViewById<TextView>(R.id.numcorrect)
-        var incorrect = findViewById<TextView>(R.id.numincorrect)
-        var backbutton = findViewById<Button>(R.id.backtomain)
+        val scoreTextView = findViewById<TextView>(R.id.score)
+        val correct = findViewById<TextView>(R.id.numcorrect)
+        val incorrect = findViewById<TextView>(R.id.numincorrect)
+        val backbutton = findViewById<Button>(R.id.backtomain)
 
         // Assign value to views
         correct.text = "$score"
         incorrect.text = "${numQuestion-score}"
-        var result = (score.toDouble()/numQuestion.toDouble())*100
+        val result = (score.toDouble()/numQuestion.toDouble())*100
         scoreTextView.text = "${result.toInt()}%"
 
         // add OnClickListener to back button
-        backbutton.setOnClickListener({
+        backbutton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java);
             startActivity(intent)
-        })
+        }
 
         // Create circular progress bar
         val circularProgressBar = findViewById<CircularProgressBar>(R.id.circle)
@@ -76,15 +76,5 @@ class ResultActivity : AppCompatActivity() {
             startAngle = 180f
             progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
         }
-        circularProgressBar.onProgressChangeListener = { progress ->
-            // Do something
-        }
-
-        circularProgressBar.onIndeterminateModeChangeListener = { isEnable ->
-            // Do something
-        }
-    }
-    fun setScoreDescription(score: Int, numQuestion: Int) {
-
     }
 }

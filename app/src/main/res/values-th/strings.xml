@@ -31,4 +31,6 @@
     <string name="Thai_button">ภาษาไทย</string>
     <string name="label_setting">ตั้งค่า</string>
     <string name="Error_message">\"กรุณาแสดงความคิดเห็น \"</string>
+    <string name="back_to_home">หน้าหลัก</string>
+    <string name="searchtext">ค้นหา</string>
 </resources>

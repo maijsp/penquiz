@@ -21,8 +21,6 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
         // Buttons
         emailSignInButton.setOnClickListener(this)
         emailCreateAccountButton.setOnClickListener(this)
-//        signOutButton.setOnClickListener(this)
-//        verifyEmailButton.setOnClickListener(this)
 
         // [START initialize_auth]
         auth = FirebaseAuth.getInstance()
@@ -62,8 +60,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
                 }
 
                 // [START_EXCLUDE]
@@ -73,36 +70,6 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
                 // [END_EXCLUDE]
             }
 //         [END sign_in_with_email]
-    }
-
-    private fun signOut() {
-        auth.signOut()
-    }
-
-    private fun sendEmailVerification() {
-        // Disable button
-        //verifyEmailButton.isEnabled = false
-
-        // Send verification email
-        // [START send_email_verification]
-        val user = auth.currentUser
-        user?.sendEmailVerification()?.addOnCompleteListener(this) { task ->
-                // [START_EXCLUDE]
-                // Re-enable button
-                //verifyEmailButton.isEnabled = true
-                if (task.isSuccessful) {
-                    Toast.makeText(baseContext,
-                        "Verification email sent to ${user.email} ",
-                        Toast.LENGTH_SHORT).show()
-                } else {
-                    Log.e(TAG, "sendEmailVerification", task.exception)
-                    Toast.makeText(baseContext,
-                        "Failed to send verification email.",
-                        Toast.LENGTH_SHORT).show()
-                }
-                // [END_EXCLUDE]
-            }
-        // [END send_email_verification]
     }
 
     private fun validateForm(): Boolean {
@@ -132,8 +99,6 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
             // R.id.emailCreateAccountButton -> createAccount(fieldEmail.text.toString(), fieldPassword.text.toString())
             R.id.emailSignInButton -> signIn(fieldEmail.text.toString(), fieldPassword.text.toString())
             R.id.emailCreateAccountButton -> createAccount(emailCreateAccountButton)
-            // R.id.signOutButton -> signOut()
-            //R.id.verifyEmailButton -> sendEmailVerification()
         }
     }
 
