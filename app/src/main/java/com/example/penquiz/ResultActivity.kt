@@ -8,7 +8,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.penquiz.ui.history.HistoryFragment
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import kotlinx.android.synthetic.main.quizes_row.*
 import kotlin.math.round
 import kotlin.math.roundToInt
 
@@ -21,8 +24,10 @@ class ResultActivity : AppCompatActivity() {
         // get data sent from QuizActivity
         val score: Int = intent.getIntExtra("score", 0)
         val numQuestion: Int = intent.getIntExtra("numQuestion", 0)
+        val quizname: String = intent.getStringExtra("quizname")!!
         Log.i("SCORE", "Score receivce  : ${score}")
         Log.i("SCORE", "Num question receivce  : ${numQuestion}")
+        Log.i("SCORE", "Quiz Name : ${quizname}")
 
         // Get views
         val scoreTextView = findViewById<TextView>(R.id.score)
@@ -41,6 +46,13 @@ class ResultActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java);
             startActivity(intent)
         }
+
+        // Create bundle and send score to keep in HistoryFragment
+//        val bundle: Bundle = Bundle()
+//        bundle.putString("quizname", quizname)
+//        bundle.putInt("quizscore", score)
+//        val fragment:HistoryFragment = HistoryFragment()
+//        fragment.arguments = bundle
 
         // Create circular progress bar
         val circularProgressBar = findViewById<CircularProgressBar>(R.id.circle)

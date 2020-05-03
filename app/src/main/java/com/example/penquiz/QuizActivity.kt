@@ -42,6 +42,7 @@ class QuizActivity : AppCompatActivity() {
     private lateinit var textQuesTitle:TextView
     private lateinit var testQuesDesc:TextView
     private lateinit var progressBar: RoundCornerProgressBar
+    private lateinit var quiztitle: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +54,10 @@ class QuizActivity : AppCompatActivity() {
 
         // Receive data
         val intent = intent
-        var quiztitle = intent.getStringExtra("quizname")
+        quiztitle = intent.getStringExtra("quizname")
         var quizId = intent.getIntExtra("quizid", -1)
+        // Log.d("RECEIVE", quizName)
+
         // Test passed data
         actionbar!!.title = quiztitle
         Log.d("RECEIVE", "RECEIVE ${quizId} ${quiztitle}")
@@ -116,6 +119,8 @@ class QuizActivity : AppCompatActivity() {
             val intent = Intent(this, ResultActivity::class.java) // create a new intent
             intent.putExtra("score", score) // put the score to the result activity
             intent.putExtra("numQuestion", countQuestion)
+            intent.putExtra("quizname", quiztitle)
+            Log.d("SENDING", "${score} : ${countQuestion} : ${quiztitle}")
             startActivity(intent)
 
         } else {

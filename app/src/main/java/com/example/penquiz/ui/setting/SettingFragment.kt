@@ -53,6 +53,7 @@ class SettingFragment: Fragment(){
     private lateinit var ButtonThai: Button
     private lateinit var ButtonEng: Button
     private lateinit var username: TextView
+    private lateinit var user:FirebaseUser
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -68,7 +69,7 @@ class SettingFragment: Fragment(){
         ButtonEng = root.findViewById(R.id.button_thai)
 
         savedInstanceState?.let { onRestoreInstanceState(it) }
-        var user: FirebaseUser? =FirebaseAuth.getInstance().currentUser
+        user = FirebaseAuth.getInstance().currentUser!!
         username.text = user!!.email
 
         mDatabase = FirebaseDatabase.getInstance().getReference("image")
@@ -108,7 +109,7 @@ class SettingFragment: Fragment(){
     }
 
     fun addOperation(v: View?) {
-        val options = arrayOf<String>("Take Photo","Choose from gallery","Cancel")
+        val options = arrayOf<String>("Take Photo","Choose from gallery","Cancel","Delete image profile")
         val builder = AlertDialog.Builder(this.context)
         builder.setTitle("Choose your profile picture")
 
@@ -159,7 +160,9 @@ class SettingFragment: Fragment(){
             else if(options[item].equals("Cancel")){
                 dialog.dismiss()
             }
-
+            else if(options[item].equals("Delete image profile")) {
+                mDatabase.child(user!!.uid).removeValue()
+            }
         })
         val dialog = builder.create()
         dialog.show()
