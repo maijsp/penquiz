@@ -18,6 +18,6 @@
 
     <font
         android:fontStyle="italic"
-        android:fontWeight="700"
+        android:fontWeight="400"
         android:font="@font/dmsans_bolditalic"/>
 </font-family>

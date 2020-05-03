@@ -132,7 +132,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
             // R.id.emailCreateAccountButton -> createAccount(fieldEmail.text.toString(), fieldPassword.text.toString())
             R.id.emailSignInButton -> signIn(fieldEmail.text.toString(), fieldPassword.text.toString())
             R.id.emailCreateAccountButton -> createAccount(emailCreateAccountButton)
-            //R.id.signOutButton -> signOut()
+            // R.id.signOutButton -> signOut()
             //R.id.verifyEmailButton -> sendEmailVerification()
         }
     }

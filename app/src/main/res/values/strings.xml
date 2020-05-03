@@ -5,7 +5,7 @@
     <string name="nav_header_title" translatable="false">Android Studio</string>
     <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
     <string name="nav_header_desc" translatable="false">Navigation header</string>
-    <string name="action_settings" translatable="false">Settings</string>
+
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
@@ -29,7 +29,6 @@
     <!--    -->
     <string name="sign_in">Sign In</string>
     <string name="create_account">Create Account</string>
-    <string name="sign_out">Sign Out</string>
     <string name="verify_email">Verify Email</string>
     <string name="disconnect">Disconnect</string>
     <string name="loading">Loading…</string>
@@ -113,5 +112,7 @@
     <string name="Error_message">\"Enter Your Message \"</string>
     <string name="Show_username">Username</string>
 
+    <!-- Setting at Main   -->
+    <string name="sign_out">Sign out</string>
 
 </resources>

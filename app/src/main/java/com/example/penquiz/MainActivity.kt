@@ -2,6 +2,7 @@ package com.example.penquiz
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -19,11 +20,12 @@ import com.google.firebase.database.*
 
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var auth: FirebaseAuth
@@ -32,9 +34,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Initialize Firebase Auth
-        super.onCreate(savedInstanceState)
-        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance()
+        super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -99,5 +100,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         savedInstanceState.getString("outputFileUri")
+    }
+
+    override fun onClick(v: View?) {
+        val i = v?.id
+        when (i) {
+            // R.id.emailCreateAccountButton -> createAccount(fieldEmail.text.toString(), fieldPassword.text.toString())
+//            R.id.emailSignInButton -> signIn(fieldEmail.text.toString(), fieldPassword.text.toString())
+//            R.id.emailCreateAccountButton -> createAccount(emailCreateAccountButton)
+            R.id.action_settings -> signOut()
+            //R.id.verifyEmailButton -> sendEmailVerification()
+        }
+    }
+
+    private fun signOut() {
+        auth.signOut()
     }
 }

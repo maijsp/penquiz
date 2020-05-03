@@ -22,7 +22,7 @@
     <string name="choice4">ง.</string>
     <string name="ques_title">ข้อ</string>
     <string name="ques_description">คำถาม</string>
-    <string name="setting_description">เปลี่ยรูปภาพโปรไฟล์</string>
+    <string name="setting_description">เปลี่ยนรูปภาพโปรไฟล์</string>
     <string name="next">ข้อถัดไป</string>
     <string name="back">ย้อนกลับ</string>
     <string name="save_button">บันทึกการเปลี่ยนแปลง</string>

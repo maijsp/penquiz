@@ -45,22 +45,22 @@ class HomeFragment : Fragment() {
 
         // Init dataList
         dataList = ArrayList()
+        quizAdapter = QuizAdapter(dataList)
+        // Init view from root view
+        recyclerView = rootView.findViewById(R.id.recycleView_main)
+        searchInput = rootView.findViewById(R.id.searchtext)
+        // set layout
+        recyclerView.layoutManager = LinearLayoutManager(activity)
 
         // Retreive data from firebase https://www.youtube.com/watch?v=OvDZVV5CbQg to dataList
         fetchData(object: QuizCallBack{
             override fun onCallBack(quizes: List<Quizes>) {
                 dataList = quizes as MutableList<Quizes>
-                quizAdapter = QuizAdapter(dataList)
                 recyclerView.adapter = quizAdapter
+                quizAdapter.notifyDataSetChanged()
                 Log.d("fetching", "Successfully retreive data to dataList")
             }
         })
-        // Init view from root view
-        recyclerView = rootView.findViewById(R.id.recycleView_main)
-        searchInput = rootView.findViewById(R.id.searchtext)
-
-        // set layout
-        recyclerView.layoutManager = LinearLayoutManager(activity)
 
         // set adapter corresponding to the search query
         searchInput.addTextChangedListener(object: TextWatcher {
