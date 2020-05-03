@@ -23,31 +23,31 @@ class RegisterActivity : AppCompatActivity() ,View.OnClickListener {
         setContentView(R.layout.activity_register)
         auth = FirebaseAuth.getInstance()
 
+        // Set OnClickListener
         confirmRegister.setOnClickListener(this)
         cancelRegister.setOnClickListener(this)
-//        val button = findViewById<Buttonsdfsd>(R.id.confirmRegister)
-//        button.setOnClickListener {
-//            createAccount()
-//        }
     }
 
      override fun onClick(v: View) {
         val i = v.id
         when (i) {
-            // R.id.emailCreateAccountButton -> createAccount(fieldEmail.text.toString(), fieldPassword.text.toString())
-            // R.id.emailSignInButton -> signIn(fieldEmail.text.toString(), fieldPassword.text.toString())
-            R.id.cancelRegister -> cancelRegistration(cancelRegister)
-            R.id.confirmRegister -> createAccount(fieldEmail.text.toString(), fieldPassword.text.toString())
-            //R.id.signOutButton -> signOut()
-            //R.id.verifyEmailButton -> sendEmailVerification()
+            R.id.cancelRegister -> cancelRegistration(cancelRegister) // cancel register -> go back to LoginActivity
+            R.id.confirmRegister -> createAccount(fieldEmail.text.toString(), fieldPassword.text.toString()) // Register the account
         }
     }
 
+    /**
+     * @param view
+     * This function is used to cancel regis -> go back to LoginActivity
+     */
     private fun cancelRegistration(view: View) {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 
+    /**
+     * validateForm() is used to validate the input typed by users
+     */
     private fun validateForm(): Boolean {
         var valid = true
 
@@ -69,12 +69,17 @@ class RegisterActivity : AppCompatActivity() ,View.OnClickListener {
         return valid
     }
 
+    /**
+     * @param email
+     * @param password
+     * This function is used to creatAccount by email -> FirebaseAuthentication
+     */
+
     private fun createAccount(email: String, password: String) {
         Log.d(TAG,"createAccount:$email")
         if (!validateForm()) {
             return
         }
-        // showProgressBar()
 
         // [START create_user_with_email]
         auth.createUserWithEmailAndPassword(email, password)
@@ -84,16 +89,12 @@ class RegisterActivity : AppCompatActivity() ,View.OnClickListener {
                     Log.d(TAG, "createUserWithEmail:success -> $email")
                     Toast.makeText(baseContext, "Success.", Toast.LENGTH_SHORT).show()
                     val user = auth.currentUser
-                     //updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "User already exists in the system", Toast.LENGTH_SHORT).show()
-                    //updateUI(null)
                 }
-
                 // [START_EXCLUDE]
-                // [END_EXCLUDE]
             }
         // [END create_user_with_email]
     }

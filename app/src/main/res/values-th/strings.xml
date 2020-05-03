@@ -34,4 +34,6 @@
     <string name="back_to_home">หน้าหลัก</string>
     <string name="searchtext">ค้นหา</string>
     <string name="menu_history">ประวัติ</string>
+    <string name="quiz_history">ประวัติการเล่น</string>
+    <string name="you_haven_t_done_any_quizes_before">ลองเล่นควิซก่อนสิ :D</string>
 </resources>

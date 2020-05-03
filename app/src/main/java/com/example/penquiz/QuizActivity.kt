@@ -34,6 +34,7 @@ class QuizActivity : AppCompatActivity() {
     private var total = -1
     private var score = 0
     private var progressnum = 0
+    private var quizId = 0
 
     private lateinit var button1:Button
     private lateinit var button2:Button
@@ -55,7 +56,7 @@ class QuizActivity : AppCompatActivity() {
         // Receive data
         val intent = intent
         quiztitle = intent.getStringExtra("quizname")
-        var quizId = intent.getIntExtra("quizid", -1)
+        quizId = intent.getIntExtra("quizid", -1)
         // Log.d("RECEIVE", quizName)
 
         // Test passed data
@@ -120,7 +121,8 @@ class QuizActivity : AppCompatActivity() {
             intent.putExtra("score", score) // put the score to the result activity
             intent.putExtra("numQuestion", countQuestion)
             intent.putExtra("quizname", quiztitle)
-            Log.d("SENDING", "${score} : ${countQuestion} : ${quiztitle}")
+            intent.putExtra("quizid", quizId)
+            Log.d("SENDING", "${score} : ${countQuestion} : ${quiztitle} ${quizId}")
             startActivity(intent)
 
         } else {

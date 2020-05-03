@@ -68,6 +68,11 @@ public class QuizAdapter(internal var dataset: List<Quizes>) : RecyclerView.Adap
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = myDatasetFilter.size
 
+    /**
+     * @param
+     * @return myDatasetFilter
+     * This function is used to perform filter of the dataList corresponding by input
+     */
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {

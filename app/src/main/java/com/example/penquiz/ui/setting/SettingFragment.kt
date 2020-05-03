@@ -53,7 +53,7 @@ class SettingFragment: Fragment(){
     private lateinit var ButtonThai: Button
     private lateinit var ButtonEng: Button
     private lateinit var username: TextView
-    private lateinit var user:FirebaseUser
+    private lateinit var user: FirebaseUser
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -72,7 +72,8 @@ class SettingFragment: Fragment(){
         user = FirebaseAuth.getInstance().currentUser!!
         username.text = user!!.email
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("image")
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("Users")
         mDatabase!!.keepSynced(true)  //realtime data from firebase
         mDatabase.child(user!!.uid.toString()).addValueEventListener(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
@@ -109,16 +110,19 @@ class SettingFragment: Fragment(){
     }
 
     fun addOperation(v: View?) {
-        val options = arrayOf<String>("Take Photo","Choose from gallery","Cancel","Delete image profile")
+        val options = arrayOf<String>("Take Photo","Choose from gallery","Delete image profile", "Cancel")
         val builder = AlertDialog.Builder(this.context)
         builder.setTitle("Choose your profile picture")
 
         builder.setItems(options, DialogInterface.OnClickListener { dialog, item ->
             if(options[item].equals("Take Photo")){
                 val takePicture: Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+
+
                 var photoUri: Uri? = null
                 //activity!!.packageManager -> in case of fragment condition
-                if(takePicture.resolveActivity(activity!!.packageManager) != null) {
+                if(takePicture.resolveActivity(requireActivity().packageManager) != null) {
                     var photoPath:File? = null
                     try{
                         photoPath = createImage()
@@ -129,14 +133,17 @@ class SettingFragment: Fragment(){
                         //activity!!.applicationContext -> to get context if it is fragment
                         photoUri = FileProvider.getUriForFile(activity!!.applicationContext, "com.coutocode.cameraexample.fileprovider", photoPath)
                         takePicture.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+
                         startActivityForResult(takePicture,REQUEST_IMAGE_CAPTURE)
                         Log.d("Fragment", "EXIF info for file " + photoPath)
-                      //  Toast.makeText(activity!!.getApplicationContext(),"photoPath!!",Toast.LENGTH_SHORT).show()
+                        //  Toast.makeText(activity!!.getApplicationContext(),"photoPath!!",Toast.LENGTH_SHORT).show()
                     }
                 }
             }
             else if(options[item].equals("Choose from gallery")){
                 val choosePicture: Intent = Intent( Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+
+
                 var photoUri: Uri? = null
                 //activity!!.packageManager -> in case of fragment condition
                 if(choosePicture.resolveActivity(activity!!.packageManager) != null) {
@@ -150,6 +157,8 @@ class SettingFragment: Fragment(){
                         //activity!!.applicationContext -> to get context if it is fragment
                         photoUri = FileProvider.getUriForFile(activity!!.applicationContext, "com.coutocode.cameraexample.fileprovider", photoPath)
                         choosePicture.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+
+
                         startActivityForResult(choosePicture,REQUEST_IMAGE_CHOOSE)
                         Log.d("Fragment", "EXIF info for file " + photoPath)
                         Toast.makeText(activity!!.getApplicationContext(),"photoPath!!",Toast.LENGTH_SHORT).show()
@@ -160,9 +169,10 @@ class SettingFragment: Fragment(){
             else if(options[item].equals("Cancel")){
                 dialog.dismiss()
             }
-            else if(options[item].equals("Delete image profile")) {
+            else if(options[item].equals("Delete image profile")){
                 mDatabase.child(user!!.uid).removeValue()
             }
+
         })
         val dialog = builder.create()
         dialog.show()
@@ -173,58 +183,38 @@ class SettingFragment: Fragment(){
         if(resultCode != RESULT_CANCELED){
             if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
 
-              val auxFile = File(currentPath)
-              val imageBitmap: Bitmap = BitmapFactory.decodeFile(currentPath)
-              imageProfile.setImageBitmap(imageBitmap)  //if not work use this
-                handleUpload(imageBitmap)
+                val auxFile = File(currentPath)
+                val imageBitmap: Bitmap = BitmapFactory.decodeFile(currentPath)
+                imageProfile.setImageBitmap(imageBitmap)  //if not work use this
+                //handleUpload(imageBitmap)
 
+                //try
+                handleUri(Uri.fromFile(auxFile))
             }
             else if(requestCode == 2 && resultCode == RESULT_OK && data != null)
             {
-
-                var user: FirebaseUser? =FirebaseAuth.getInstance().currentUser
                 val uri: Uri? = data.data
-                var uid= FirebaseAuth.getInstance().currentUser?.uid
-                var reference: StorageReference = FirebaseStorage.getInstance().getReference().child("profileImage") //.child(uid+ ".jpg");
-                var uploadTask =  reference.putFile(uri!!)
-
-                //try
-                uploadTask.addOnSuccessListener{
-                    reference.downloadUrl.addOnSuccessListener {
-                        mDatabase.child(user!!.uid.toString()).child("image").setValue(it.toString())
-                        Toast.makeText(activity!!.getApplicationContext(),"success!!"+it.toString(),Toast.LENGTH_SHORT).show()
-                        Log.d("DIRECTLINK",it.toString())
-                        Picasso.get().load(it).into(imageProfile)
-                    }
-                }
-
+                handleUri(uri!!)
             }
         }
     }
 
-    private fun handleUpload(imageBitmap: Bitmap) {
-        var baos:ByteArrayOutputStream =  ByteArrayOutputStream();
-        imageBitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
+    //Aom just create few minute ago
+    //this function will be called after users select profile image
+    private fun handleUri(uri: Uri) {
         var uid= FirebaseAuth.getInstance().currentUser?.uid
-
-        var reference: StorageReference = FirebaseStorage.getInstance().getReference()
-            .child("profileImage")
-            //.child(uid+ ".jpg");
-
-        var uploadTask = reference.putBytes(baos.toByteArray())
+        var reference: StorageReference = FirebaseStorage.getInstance().getReference().child("profileImage")//.child(uid+ ".jpg");
+        var uploadTask =  reference.putFile(uri!!)
         uploadTask.addOnSuccessListener{
-            mDatabase.child(uid!!).child("image").setValue(it.toString())
             reference.downloadUrl.addOnSuccessListener {
+                mDatabase.child(uid!!).child("image").setValue(it.toString())
                 Toast.makeText(activity!!.getApplicationContext(),"success!!"+it.toString(),Toast.LENGTH_SHORT).show()
                 Log.d("DIRECTLINK",it.toString())
-                Picasso.get()
-                    .load(it)
-                    .into(imageProfile)
-                 }
-            }.addOnFailureListener {
-                Toast.makeText(activity!!.getApplicationContext(),"not success!!",Toast.LENGTH_SHORT).show()
+                //Picasso.get().load(it).into(imageProfile)
             }
+        }
     }
+
 
 
     @Throws(IOException::class)
@@ -263,11 +253,6 @@ class SettingFragment: Fragment(){
         setLocale(language!!)
     }
 
-//    override fun onClick(v: View?) {
-//        when (v!!.id){
-//            R.id.camera_image -> addOperation(v)
-//        }
-//    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         var user: FirebaseUser? =FirebaseAuth.getInstance().currentUser
@@ -275,7 +260,7 @@ class SettingFragment: Fragment(){
     }
 
     fun onRestoreInstanceState(savedInstanceState: Bundle) {
-         savedInstanceState.getString("outputFileUri")
+        savedInstanceState.getString("outputFileUri")
     }
 
 }

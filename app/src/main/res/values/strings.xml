@@ -117,5 +117,9 @@
     <string name="back_to_home">Back to Home</string>
     <string name="searchtext">Search</string>
 
+    <!--  HomeFragment  -->
+    <string name="score">score</string>
+    <string name="quiz_history">Quiz History</string>
+    <string name="you_haven_t_done_any_quizes_before">You haven\'t done any quizes before</string>
 
 </resources>

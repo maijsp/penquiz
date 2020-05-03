@@ -7,24 +7,34 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.penquiz.model.QuizResult
 import com.example.penquiz.ui.history.HistoryFragment
+import com.google.firebase.auth.FirebaseAuth
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class ResultActivity : AppCompatActivity() {
+
+    private lateinit var user:FirebaseUser
+    private lateinit var mDatabase:DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
 
         // get data sent from QuizActivity
+        val quizid: Int = intent.getIntExtra("quizid", 0)
         val score: Int = intent.getIntExtra("score", 0)
         val numQuestion: Int = intent.getIntExtra("numQuestion", 0)
         val quizname: String = intent.getStringExtra("quizname")!!
-        Log.i("SCORE", "Score receivce  : ${score}")
+        Log.i("SCORE", "Score receivce  : ${score}") // will be used to keep in User History
         Log.i("SCORE", "Num question receivce  : ${numQuestion}")
-        Log.i("SCORE", "Quiz Name : ${quizname}")
+        Log.i("SCORE", "Quiz Name : ${quizname}") // will be used to keep in User History
+        Log.i("SCORE", "Quiz id : ${quizid}") // will be used to keep in User History
 
-        // Get viewsgpl
+        // Get views
         val scoreTextView = findViewById<TextView>(R.id.score)
         val correct = findViewById<TextView>(R.id.numcorrect)
         val incorrect = findViewById<TextView>(R.id.numincorrect)
@@ -42,19 +52,9 @@ class ResultActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Create bundle and send score to keep in HistoryFragment
-
-        val fragment = HistoryFragment.newInstance("Mai")
-
-//        val extras = intent.extras
-//        if (extras != null) {
-//            val bundle = Bundle()
-//            val value = extras.getString("TEST36")
-//            bundle.putString("TEST36", value)
-//            val fragInfo = HistoryFragment()
-//            fragInfo.setArguments(bundle)
-//        }
-
+        // Get current user to keep the history
+        user = FirebaseAuth.getInstance().currentUser!!
+        keepHistory(result.toInt(), quizid, quizname)
 
         // Create circular progress bar
         val circularProgressBar = findViewById<CircularProgressBar>(R.id.circle)
@@ -90,5 +90,23 @@ class ResultActivity : AppCompatActivity() {
             startAngle = 180f
             progressDirection = CircularProgressBar.ProgressDirection.TO_RIGHT
         }
+    }
+
+    /**
+     * @param score
+     * @param quizid
+     * @param quizname
+     * @author Saranphon Phathoon
+     * keepHistory(...) will update the history to keep in the firebase
+     */
+    fun keepHistory(score:Int, quizid:Int , quizname:String) {
+        Log.d("RESULT", "Keep history ${user.uid} -> ${score} ${quizname}")
+        mDatabase = FirebaseDatabase.getInstance().getReference("Users") // Reference to Users
+
+        // Initialize QuizResult object to keep result in history
+        val result:QuizResult = QuizResult()
+        result.quizscore = score.toLong()
+        result.quiztitle = quizname.toString()
+        mDatabase.child(user.uid).child("history").child(quizid.toString()).setValue(result)
     }
 }

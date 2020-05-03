@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         savedInstanceState?.let { onRestoreInstanceState(it) }
         var user: FirebaseUser? =FirebaseAuth.getInstance().currentUser
-        mDatabase = FirebaseDatabase.getInstance().getReference("image")
+        mDatabase = FirebaseDatabase.getInstance().getReference("Users")
         mDatabase!!.keepSynced(true)
         mDatabase.child(user!!.uid.toString()).addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -61,9 +61,7 @@ class MainActivity : AppCompatActivity() {
                 // Yes still there
                 val img_circle : ImageView = findViewById(R.id.camera_image) as ImageView
                 val image = snapshot.child("image").getValue(String::class.java)
-                Picasso.get()
-                    .load(image)
-                    .into(img_circle)
+                Picasso.get().load(image).into(img_circle)
                 user_email.text = user!!.email
             }
         })
