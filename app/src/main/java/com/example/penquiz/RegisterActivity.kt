@@ -59,12 +59,20 @@ class RegisterActivity : AppCompatActivity() ,View.OnClickListener {
             fieldEmail.error = null
         }
 
+        val confirmPassword = fieldConfirmPassword.text.toString()
         val password = fieldPassword.text.toString()
         if (TextUtils.isEmpty(password)) {
             fieldPassword.error = "Required."
             valid = false
         } else {
             fieldPassword.error = null
+            if(password != confirmPassword) {
+                fieldConfirmPassword.error = "Password not match"
+                valid = false
+            }
+            else {
+                fieldConfirmPassword.error = null
+            }
         }
         return valid
     }
@@ -74,25 +82,29 @@ class RegisterActivity : AppCompatActivity() ,View.OnClickListener {
      * @param password
      * This function is used to creatAccount by email -> FirebaseAuthentication
      */
-
     private fun createAccount(email: String, password: String) {
         Log.d(TAG,"createAccount:$email")
         if (!validateForm()) {
             return
         }
-
         // [START create_user_with_email]
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success -> $email")
-                    Toast.makeText(baseContext, "Success.", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this,LoginActivity::class.java)
+                    startActivity(intent)
+                    Toast.makeText(baseContext, "Success", Toast.LENGTH_SHORT).show()
                     val user = auth.currentUser
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "User already exists in the system", Toast.LENGTH_SHORT).show()
+                    if(password.length < 6) {
+                        Toast.makeText(baseContext, "Password should be at least 6 characters", Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        Toast.makeText(baseContext, "User already exists in the system", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 // [START_EXCLUDE]
             }
