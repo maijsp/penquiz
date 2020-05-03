@@ -8,17 +8,22 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="fontFamily">@font/dmsans</item>
     </style>
 
     <style name="QuizActivity" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/blueshade</item>
         <item name="colorPrimaryDark">@color/blueshade</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">@font/dmsans</item>
+
     </style>
 
     <style name="MyMaterialTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <item name="fontFamily">@font/dmsans</item>
+
     </style>
 
     <style name="ResultActivity" parent="Theme.AppCompat.Light.NoActionBar">
@@ -27,6 +32,8 @@
         <item name="colorPrimary">@color/blueshade</item>
         <item name="colorPrimaryDark">@color/blueshade</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">@font/dmsans</item>
+
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">

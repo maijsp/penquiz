@@ -44,12 +44,12 @@
     <fragment
         android:id="@+id/nav_contact"
         android:name="com.example.penquiz.ui.contactus.ContactFragment"
-        android:label="Contact us"
+        android:label="@string/contact_us"
         tools:layout="@layout/fragment_contactus" />
 
     <fragment
         android:id="@+id/nav_profile"
         android:name="com.example.penquiz.ui.setting.SettingFragment"
-        android:label="Setting"
+        android:label="@string/setting_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

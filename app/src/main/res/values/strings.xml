@@ -90,7 +90,7 @@
     <string name="textfeedback">write feedback</string>
     <string name="contact_us">Contact us</string>
     <!--    Setting fragment -->
-    <string name="setting_profiel">Setting</string>
+    <string name="setting_profile">Setting</string>
 
     <!--    QuizActivity-->
     <string name="back">back</string>

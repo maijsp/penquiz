@@ -1,7 +1,10 @@
 package com.example.penquiz
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,20 +15,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-
-import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var auth: FirebaseAuth
@@ -102,18 +100,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         savedInstanceState.getString("outputFileUri")
     }
 
-    override fun onClick(v: View?) {
-        val i = v?.id
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val i = item.itemId
         when (i) {
-            // R.id.emailCreateAccountButton -> createAccount(fieldEmail.text.toString(), fieldPassword.text.toString())
-//            R.id.emailSignInButton -> signIn(fieldEmail.text.toString(), fieldPassword.text.toString())
-//            R.id.emailCreateAccountButton -> createAccount(emailCreateAccountButton)
             R.id.action_settings -> signOut()
-            //R.id.verifyEmailButton -> sendEmailVerification()
         }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun signOut() {
+        Log.d("MAIN", "Sign Out")
         auth.signOut()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
