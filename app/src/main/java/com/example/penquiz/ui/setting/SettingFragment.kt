@@ -212,9 +212,8 @@ class SettingFragment: Fragment(){
             //.child(uid+ ".jpg");
 
         var uploadTask = reference.putBytes(baos.toByteArray())
-
         uploadTask.addOnSuccessListener{
-
+            mDatabase.child(uid!!).child("image").setValue(it.toString())
             reference.downloadUrl.addOnSuccessListener {
                 Toast.makeText(activity!!.getApplicationContext(),"success!!"+it.toString(),Toast.LENGTH_SHORT).show()
                 Log.d("DIRECTLINK",it.toString())
