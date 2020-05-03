@@ -33,4 +33,5 @@
     <string name="Error_message">\"กรุณาแสดงความคิดเห็น \"</string>
     <string name="back_to_home">หน้าหลัก</string>
     <string name="searchtext">ค้นหา</string>
+    <string name="menu_history">ประวัติ</string>
 </resources>

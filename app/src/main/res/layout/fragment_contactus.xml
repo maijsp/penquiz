@@ -63,7 +63,8 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_margin="20dp"
-                android:background="@drawable/button"
+                android:background="@drawable/custom_button"
+                android:backgroundTint="@color/blueshade"
                 android:text="@string/sendfeedback"
                 android:textColor="#FFFFFF"
                 tools:text="@string/sendfeedback" />
