@@ -39,6 +39,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
     private fun createAccount(view: View) {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     /*
