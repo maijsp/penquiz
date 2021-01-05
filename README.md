@@ -5,3 +5,10 @@ This project is about learning material, in this project, Quiz Application. Will
 |Saranphon |Phaithoon| 6088114 | 1 |
 |Supakarn   | Wongnil  | 6088137  | 1  |
 |Komolmarch  | Treechaiworapong  | 6088213 | 1 |
+
+# Technologies
+1. Kotlin
+2. Firebase Realtime Database
+
+Author
+1. Saranphon Phaithoon
